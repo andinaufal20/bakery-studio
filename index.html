@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Cake &amp; Bakery Preneur — Studio Katalog &amp; Proposal</title>
+
+  <!-- PWA Android & General -->
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#c26d3a" />
+  <meta name="description" content="Studio Katalog Online, Foto Produk & Proposal Bisnis untuk UMKM Cake & Bakery." />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+
+  <!-- PWA iPhone / iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Bakery Studio" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="./icon-512.png" />
+
+  <style>
+    :root {
+      --primary: #c26d3a;
+      --primary-dark: #9e5327;
+      --bg: #faf6f0;
+      --card: #ffffff;
+      --text: #2d2018;
+      --muted: #766458;
+      --border: #eadfd4;
+      --soft: #f5ece2;
+      --success: #247a4b;
+      --danger: #c43631;
+      --radius: 14px;
+      --shadow: 0 4px 16px rgba(66, 38, 20, 0.06);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* Layout */
+    .app-shell {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: #fff;
+      border-right: 1px solid var(--border);
+      padding: calc(20px + var(--safe-top)) 16px 20px;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 30;
+    }
+
+    .brand-mini {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 8px 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+    .brand-mini img {
+      width: 40px; height: 40px; border-radius: 10px; object-fit: cover; background: var(--soft);
+    }
+    .brand-mini h1 { font-size: 15px; margin: 0; color: var(--text); line-height: 1.2; }
+    .brand-mini span { font-size: 11px; color: var(--muted); }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 11px 14px;
+      margin-bottom: 6px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      transition: 0.15s;
+    }
+    .nav-btn:hover { background: var(--soft); color: var(--text); }
+    .nav-btn.active { background: var(--primary); color: #fff; }
+
+    .main-area {
+      flex: 1;
+      padding: calc(22px + var(--safe-top)) 24px calc(92px + var(--safe-bottom));
+      max-width: 1120px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Mobile Header & Bottom Nav */
+    .mobile-header {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 25;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: calc(10px + var(--safe-top)) 16px 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      padding: 6px 4px calc(8px + var(--safe-bottom));
+      z-index: 40;
+      justify-content: space-around;
+    }
+    .mobile-nav button {
+      background: none; border: none; color: var(--muted);
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      font-size: 10px; font-weight: 600; padding: 4px 6px; cursor: pointer;
+      border-radius: 8px;
+    }
+    .mobile-nav button .ico { font-size: 18px; line-height: 1.1; }
+    .mobile-nav button.active { color: var(--primary); }
+
+    @media (max-width: 860px) {
+      .sidebar { display: none; }
+      .mobile-header { display: flex; }
+      .mobile-nav { display: flex; }
+      .main-area { padding: 16px 14px calc(92px + var(--safe-bottom)); }
+    }
+
+    /* Cards & Typography */
+    .page-title { font-size: 22px; margin: 0 0 4px; }
+    .page-sub { font-size: 13.5px; color: var(--muted); margin: 0 0 18px; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+    .card h3 { margin: 0 0 10px; font-size: 16px; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    @media (max-width: 720px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .grid-4.stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+    .stat-box .lbl { font-size: 12px; color: var(--muted); }
+    .stat-box .val { font-size: 22px; font-weight: 800; color: var(--primary); margin-top: 2px; }
+
+    /* Buttons & Inputs */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 10px 15px; border-radius: 10px; border: 1px solid transparent;
+      font-size: 13.5px; font-weight: 600; cursor: pointer; transition: 0.15s;
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline { background: #fff; color: var(--text); border-color: var(--border); }
+    .btn-outline:hover { background: var(--soft); }
+    .btn-soft { background: var(--soft); color: var(--primary-dark); }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-danger { background: #fdecec; color: var(--danger); border-color: #f6c8c6; }
+    .btn-sm { padding: 6px 10px; font-size: 12px; border-radius: 8px; }
+    .btn-block { width: 100%; }
+
+    .form-group { margin-bottom: 13px; }
+    label { display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 5px; color: var(--text); }
+    input[type="text"], input[type="number"], input[type="url"], input[type="password"], select, textarea {
+      width: 100%; padding: 10px 12px; border-radius: 10px;
+      border: 1px solid var(--border); background: #fff; color: var(--text);
+      font-size: 14px; font-family: inherit;
+    }
+    textarea { min-height: 84px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid rgba(194,109,58,0.28); border-color: var(--primary); }
+
+    .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .between { justify-content: space-between; }
+
+    .badge {
+      display: inline-block; padding: 3px 9px; border-radius: 999px;
+      font-size: 11px; font-weight: 700; background: var(--soft); color: var(--primary-dark);
+    }
+    .badge-green { background: #e6f6ec; color: #1c6b3d; }
+
+    /* Install Banner */
+    .install-banner {
+      background: linear-gradient(135deg, #c26d3a, #8e4620);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .install-banner h4 { margin: 0 0 3px; font-size: 15px; }
+    .install-banner p { margin: 0; font-size: 12.5px; opacity: 0.92; }
+
+    /* Product Cards */
+    .prod-card {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .prod-img-wrap {
+      width: 100%; aspect-ratio: 1/1; background: var(--soft); position: relative; overflow: hidden;
+    }
+    .prod-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .prod-body { padding: 12px; flex: 1; display: flex; flex-direction: column; }
+    .prod-title { font-weight: 700; font-size: 14.5px; margin: 4px 0; }
+    .prod-price { font-weight: 800; color: var(--primary); font-size: 15px; margin-bottom: 6px; }
+    .prod-desc { font-size: 12.5px; color: var(--muted); margin: 0 0 10px; flex: 1; }
+
+    .chip-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 12px; }
+    .chip {
+      padding: 7px 13px; border-radius: 999px; border: 1px solid var(--border);
+      background: #fff; font-size: 12.5px; font-weight: 600; cursor: pointer; white-space: nowrap;
+    }
+    .chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* Modals */
+    .modal-backdrop {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(30, 18, 10, 0.55);
+      z-index: 100;
+      align-items: center; justify-content: center;
+      padding: 16px;
+      overflow-y: auto;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-box {
+      background: #fff; border-radius: 16px; width: 100%; max-width: 560px;
+      max-height: 90vh; overflow-y: auto; padding: 20px; position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+    .modal-box.wide { max-width: 920px; }
+    .modal-head {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid var(--border);
+    }
+    .modal-head h3 { margin: 0; font-size: 17px; }
+    .close-x {
+      background: var(--soft); border: none; width: 32px; height: 32px;
+      border-radius: 50%; font-size: 18px; cursor: pointer; color: var(--text);
+    }
+
+    /* Checklist */
+    .check-item {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px;
+      background: #fff;
+    }
+    .check-item.done { background: #f3fbf6; border-color: #c7e8d4; }
+
+    /* Cart floating bar */
+    .cart-bar {
+      position: sticky; bottom: 12px; background: var(--primary); color: #fff;
+      border-radius: 14px; padding: 12px 16px; display: flex; align-items: center;
+      justify-content: space-between; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      margin-top: 16px;
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed; bottom: calc(80px + var(--safe-bottom)); left: 50%;
+      transform: translateX(-50%); background: #2d2018; color: #fff;
+      padding: 10px 18px; border-radius: 999px; font-size: 13px; font-weight: 600;
+      z-index: 200; display: none; box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      max-width: 90vw; text-align: center;
+    }
+
+    .hidden { display: none !important; }
+
+    /* Print / PDF A4 Styles */
+    #print-area { display: none; }
+    @media print {
+      body { background: #fff !important; }
+      .app-shell, .mobile-header, .mobile-nav, .modal-backdrop, #toast { display: none !important; }
+      #print-area { display: block !important; }
+      @page { size: A4; margin: 14mm; }
+      .pdf-page {
+        page-break-after: always;
+        min-height: 265mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .pdf-page:last-child { page-break-after: auto; }
+      .pdf-cover {
+        text-align: center;
+        justify-content: center !important;
+        align-items: center;
+        border: 2px solid var(--primary);
+        border-radius: 16px;
+        padding: 36px;
+        background: #faf6f0;
+      }
+      .pdf-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .pdf-grid-6 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .pdf-card {
+        border: 1px solid #e2d6ca; border-radius: 10px; padding: 10px;
+        break-inside: avoid; page-break-inside: avoid;
+      }
+      .pdf-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+      .pdf-grid-6 .pdf-card img { height: 105px; }
+      .pdf-header {
+        display: flex; justify-content: space-between; align-items: center;
+        border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin-bottom: 12px;
+        font-size: 12px; color: #555;
+      }
+      .pdf-footer {
+        border-top: 1px solid #ddd; padding-top: 6px; margin-top: 12px;
+        display: flex; justify-content: space-between; font-size: 11px; color: #666;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Mobile Top Header -->
+  <header class="mobile-header">
+    <div class="row" style="gap:8px;">
+      <img id="mobLogo" src="./icon-192.png" alt="Logo" style="width:32px;height:32px;border-radius:8px;object-fit:cover;" />
+      <div>
+        <div id="mobBrandName" style="font-weight:800;font-size:14px;line-height:1.1;">Dapur Manis Artisan</div>
+        <div style="font-size:11px;color:var(--muted);">Cake &amp; Bakery Studio</div>
+      </div>
+    </div>
+    <button class="btn btn-soft btn-sm" onclick="openInstallGuide()">📲 Install HP</button>
+  </header>
+
+  <div class="app-shell" id="appShell">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar">
+      <div class="brand-mini">
+        <img id="sideLogo" src="./icon-192.png" alt="Logo" />
+        <div>
+          <h1 id="sideBrandName">Dapur Manis Artisan</h1>
+          <span>Cake &amp; Bakery Preneur</span>
+        </div>
+      </div>
+      <button class="nav-btn active" data-tab="home" onclick="switchTab('home')">🏠 Beranda</button>
+      <button class="nav-btn" data-tab="brand" onclick="switchTab('brand')">🎨 Profil Brand</button>
+      <button class="nav-btn" data-tab="products" onclick="switchTab('products')">🧁 Bank Produk</button>
+      <button class="nav-btn" data-tab="catalogs" onclick="switchTab('catalogs')">📖 Multi-Katalog</button>
+      <button class="nav-btn" data-tab="proposals" onclick="switchTab('proposals')">📄 Proposal Bisnis</button>
+      <button class="nav-btn" data-tab="settings" onclick="switchTab('settings')">☁️ Cloud &amp; AI</button>
+
+      <div style="margin-top:auto;padding-top:14px;border-top:1px solid var(--border);">
+        <button class="btn btn-soft btn-block btn-sm" onclick="openInstallGuide()">📲 Install di Android / iPhone</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-area">
+
+      <!-- TAB: BERANDA -->
+      <section id="tab-home">
+        <div class="install-banner" id="installBanner">
+          <div>
+            <h4>📲 Pasang Aplikasi di Layar Utama HP</h4>
+            <p>Bisa dibuka seperti aplikasi asli di Android &amp; iPhone, tetap jalan walau offline.</p>
+          </div>
+          <div class="row">
+            <button class="btn btn-outline btn-sm" id="btnNativeInstall" style="display:none;color:var(--primary-dark);" onclick="triggerNativeInstall()">Install Sekarang</button>
+            <button class="btn btn-outline btn-sm" style="color:var(--primary-dark);" onclick="openInstallGuide()">Cara Install Android &amp; iPhone</button>
+          </div>
+        </div>
+
+        <h2 class="page-title">Selamat Datang di Studio Bakery 👋</h2>
+        <p class="page-sub">Kelola foto produk, katalog online keranjang WhatsApp, dan proposal bisnis dalam satu aplikasi.</p>
+
+        <div class="grid-4 stats-grid" style="margin-bottom:16px;">
+          <div class="stat-box"><div class="lbl">Total Produk</div><div class="val" id="statProd">0</div></div>
+          <div class="stat-box"><div class="lbl">Katalog Aktif</div><div class="val" id="statCat">0</div></div>
+          <div class="stat-box"><div class="lbl">Proposal Bisnis</div><div class="val" id="statProp">0</div></div>
+          <div class="stat-box"><div class="lbl">Status Cloud</div><div class="val" id="statCloud" style="font-size:15px;padding-top:6px;">Lokal</div></div>
+        </div>
+
+        <div class="card">
+          <h3>Checklist Mulai Cepat</h3>
+          <div id="onboardingList"></div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>🧁 Tambah Produk Kue</h3>
+            <p style="font-size:13px;color:var(--muted);">Upload foto dari galeri HP (auto kompres WebP + filter makanan &amp; watermark).</p>
+            <button class="btn btn-primary btn-sm" onclick="switchTab('products'); openProductModal();">Tambah Produk</button>
+          </div>
+          <div class="card">
+            <h3>📖 Buat Katalog &amp; PDF</h3>
+            <p style="font-size:13px;color:var(--muted);">Buat katalog online dengan keranjang WhatsApp opsional dan cetak PDF A4.</p>
+            <button class="btn btn-primary btn-sm" onclick="switchTab('catalogs'); openCatalogModal();">Buat Katalog</button>
+          </div>
+          <div class="card">
+            <h3>📄 Susun Proposal</h3>
+            <p style="font-size:13px;color:var(--muted);">Tawarkan snack box kantor, konsinyasi kafe, atau hampers korporat secara profesional.</p>
+            <button class="btn btn-primary btn-sm" onclick="switchTab('proposals'); openProposalModal();">Buat Proposal</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: PROFIL BRAND -->
+      <section id="tab-brand" class="hidden">
+        <h2 class="page-title">Profil Brand &amp; Identitas Toko</h2>
+        <p class="page-sub">Data ini otomatis tampil di cover katalog, watermark foto, link online, dan kop proposal.</p>
+
+        <div class="card">
+          <div class="grid-2">
+            <div>
+              <div class="form-group">
+                <label>Logo Toko</label>
+                <div class="row">
+                  <img id="brandLogoPreview" src="./icon-192.png" alt="Logo" style="width:68px;height:68px;border-radius:12px;object-fit:cover;border:1px solid var(--border);" />
+                  <div>
+                    <input type="file" id="brandLogoInput" accept="image/*" onchange="handleLogoUpload(event)" style="max-width:220px;font-size:12px;" />
+                    <div style="font-size:11px;color:var(--muted);margin-top:4px;">Otomatis dikompres ringan.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Nama Toko / Brand</label>
+                <input type="text" id="brandName" placeholder="Contoh: Dapur Manis Artisan" />
+              </div>
+              <div class="form-group">
+                <label>Tagline Singkat</label>
+                <input type="text" id="brandTagline" placeholder="Freshly Baked Homemade Cakes &amp; Pastry" />
+              </div>
+              <div class="form-group">
+                <label>Warna Tema Utama</label>
+                <div class="row">
+                  <input type="color" id="brandColor" value="#c26d3a" style="width:52px;height:38px;padding:2px;border-radius:8px;border:1px solid var(--border);" />
+                  <button class="btn btn-outline btn-sm" onclick="setBrandColor('#c26d3a')">Terracotta</button>
+                  <button class="btn btn-outline btn-sm" onclick="setBrandColor('#8b4513')">Choco</button>
+                  <button class="btn btn-outline btn-sm" onclick="setBrandColor('#b55d7b')">Berry</button>
+                  <button class="btn btn-outline btn-sm" onclick="setBrandColor('#3f6a54')">Matcha</button>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="form-group">
+                <label>Nomor WhatsApp Admin (Format 628...)</label>
+                <input type="text" id="brandWa" placeholder="6281234567890" />
+              </div>
+              <div class="form-group">
+                <label>Instagram / TikTok</label>
+                <input type="text" id="brandIg" placeholder="@dapurmanis.artisan" />
+              </div>
+              <div class="form-group">
+                <label>Alamat Toko / Area Pengiriman</label>
+                <input type="text" id="brandAddr" placeholder="Jl. Melati No. 12, Makassar — Pengiriman Instant" />
+              </div>
+              <div class="form-group">
+                <label>Aturan Pemesanan / Pre-Order (Tampil di Penutup Katalog)</label>
+                <textarea id="brandPo" placeholder="Pemesanan minimal H-2. 100% Halal &amp; Tanpa Pengawet."></textarea>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="saveBrand()">💾 Simpan Profil Brand</button>
+        </div>
+      </section>
+
+      <!-- TAB: BANK PRODUK -->
+      <section id="tab-products" class="hidden">
+        <div class="row between" style="margin-bottom:10px;">
+          <div>
+            <h2 class="page-title" style="margin-bottom:2px;">Bank Produk</h2>
+            <p class="page-sub" style="margin-bottom:0;">Upload foto manual (auto WebP) atau lengkapi deskripsi dengan AI.</p>
+          </div>
+          <div class="row">
+            <button class="btn btn-outline btn-sm" onclick="openCatManager()">🏷️ Kelola Kategori</button>
+            <button class="btn btn-primary btn-sm" onclick="openProductModal()">+ Tambah Produk</button>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top:12px;">
+          <input type="text" id="prodSearch" placeholder="🔍 Cari nama kue atau kategori..." oninput="renderProducts()" />
+        </div>
+
+        <div class="chip-bar" id="catFilterBar"></div>
+        <div class="grid-3" id="productGrid"></div>
+      </section>
+
+      <!-- TAB: MULTI-KATALOG -->
+      <section id="tab-catalogs" class="hidden">
+        <div class="row between" style="margin-bottom:14px;">
+          <div>
+            <h2 class="page-title" style="margin-bottom:2px;">Multi-Katalog Online &amp; PDF</h2>
+            <p class="page-sub" style="margin-bottom:0;">Buat banyak katalog terpisah (Harian, Hampers, Snack Box) lengkap dengan keranjang WA opsional.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openCatalogModal()">+ Buat Katalog Baru</button>
+        </div>
+        <div class="grid-2" id="catalogList"></div>
+      </section>
+
+      <!-- TAB: PROPOSAL BISNIS -->
+      <section id="tab-proposals" class="hidden">
+        <div class="row between" style="margin-bottom:14px;">
+          <div>
+            <h2 class="page-title" style="margin-bottom:2px;">Pembuat Proposal Bisnis</h2>
+            <p class="page-sub" style="margin-bottom:0;">Susun proposal penawaran B2B (kantor, kafe, event) dalam bentuk PDF A4 atau link online.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openProposalModal()">+ Buat Proposal Baru</button>
+        </div>
+        <div class="grid-2" id="proposalList"></div>
+      </section>
+
+      <!-- TAB: CLOUD & AI -->
+      <section id="tab-settings" class="hidden">
+        <h2 class="page-title">Cloud (Supabase) &amp; Kunci AI</h2>
+        <p class="page-sub">Aplikasi tetap bisa dipakai 100% offline/manual. Hubungkan Cloud untuk link online dan AI untuk teks otomatis.</p>
+
+        <div class="grid-2">
+          <!-- Supabase Cloud -->
+          <div class="card">
+            <h3>☁️ Koneksi Supabase (Server Pribadi)</h3>
+            <div class="form-group">
+              <label>URL Cloudflare Worker (Untuk Login 1-Klik &amp; Auto-Ping)</label>
+              <input type="url" id="workerUrlInput" placeholder="https://bakery-unified-worker.namakamu.workers.dev" />
+            </div>
+            <button class="btn btn-primary btn-block" style="margin-bottom:12px;" onclick="loginSupabaseOAuth()">⚡ Hubungkan Supabase Otomatis (1-Klik)</button>
+
+            <hr style="border:none;border-top:1px solid var(--border);margin:14px 0;" />
+            <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Atau masukkan kredensial Supabase secara manual:</div>
+            <div class="form-group">
+              <label>Supabase Project URL</label>
+              <input type="url" id="sbUrlInput" placeholder="https://xxxx.supabase.co" />
+            </div>
+            <div class="form-group">
+              <label>Supabase Anon Key</label>
+              <input type="password" id="sbKeyInput" placeholder="eyJhbGciOi..." />
+            </div>
+            <div class="row">
+              <button class="btn btn-outline btn-sm" onclick="saveSupabaseManual()">Simpan &amp; Aktifkan Auto-Ping</button>
+              <button class="btn btn-soft btn-sm" onclick="copySqlSetup()">📋 Salin Script SQL</button>
+            </div>
+          </div>
+
+          <!-- AI & Backup -->
+          <div>
+            <div class="card">
+              <h3>✨ Pengaturan AI (Opsional)</h3>
+              <div class="form-group">
+                <label>Kode Lisensi Paket (Kredit AI Bawaan)</label>
+                <input type="text" id="licenseKeyInput" placeholder="Contoh: BAKERY-XXXX-XXXX" />
+              </div>
+              <div class="form-group">
+                <label>Atau Kunci API Gemini Sendiri (Gratis dari Google AI Studio)</label>
+                <input type="password" id="geminiKeyInput" placeholder="AIzaSy..." />
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="saveAiSettings()">Simpan Pengaturan AI</button>
+            </div>
+
+            <div class="card">
+              <h3>💾 Backup &amp; Pindah Perangkat</h3>
+              <p style="font-size:12.5px;color:var(--muted);margin-top:0;">Simpan semua data produk, katalog, dan proposal ke file JSON.</p>
+              <div class="row">
+                <button class="btn btn-outline btn-sm" onclick="exportBackup()">⬇️ Export Backup JSON</button>
+                <label class="btn btn-soft btn-sm" style="margin:0;cursor:pointer;">
+                  ⬆️ Import JSON
+                  <input type="file" accept=".json" onchange="importBackup(event)" style="display:none;" />
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav class="mobile-nav">
+    <button class="active" data-tab="home" onclick="switchTab('home')"><span class="ico">🏠</span>Beranda</button>
+    <button data-tab="brand" onclick="switchTab('brand')"><span class="ico">🎨</span>Brand</button>
+    <button data-tab="products" onclick="switchTab('products')"><span class="ico">🧁</span>Produk</button>
+    <button data-tab="catalogs" onclick="switchTab('catalogs')"><span class="ico">📖</span>Katalog</button>
+    <button data-tab="proposals" onclick="switchTab('proposals')"><span class="ico">📄</span>Proposal</button>
+    <button data-tab="settings" onclick="switchTab('settings')"><span class="ico">☁️</span>Cloud</button>
+  </nav>
+
+  <!-- MODAL: PRODUK -->
+  <div class="modal-backdrop" id="modalProduct">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="prodModalTitle">Tambah Produk</h3>
+        <button class="close-x" onclick="closeModal('modalProduct')">&times;</button>
+      </div>
+      <input type="hidden" id="editProdId" />
+      <div class="form-group">
+        <label>Foto Produk (Manual Auto-Kompres WebP 1:1)</label>
+        <div class="row" style="align-items:flex-start;">
+          <img id="prodImgPreview" src="./icon-192.png" alt="Preview" style="width:110px;height:110px;border-radius:12px;object-fit:cover;border:1px solid var(--border);" />
+          <div style="flex:1;min-width:180px;">
+            <input type="file" id="prodImgFile" accept="image/*" onchange="handleProductImage(event)" style="font-size:12px;margin-bottom:8px;" />
+            <div id="imgCompressInfo" style="font-size:11.5px;color:var(--success);margin-bottom:6px;"></div>
+            <div class="row" style="gap:6px;">
+              <select id="prodFilter" onchange="reprocessProductImage()" style="width:auto;padding:6px 8px;font-size:12px;">
+                <option value="none">Filter: Asli</option>
+                <option value="bright">Cerah Alami</option>
+                <option value="warm">Hangat Bakery</option>
+                <option value="crisp">Tajam &amp; Kontras</option>
+              </select>
+              <label style="display:flex;align-items:center;gap:4px;font-size:12px;margin:0;font-weight:600;">
+                <input type="checkbox" id="prodWatermark" onchange="reprocessProductImage()" /> Watermark Toko
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Nama Produk</label>
+          <input type="text" id="prodName" placeholder="Contoh: Burnt Cheesecake 16cm" />
+        </div>
+        <div class="form-group">
+          <label>Harga Jual (Rp)</label>
+          <input type="number" id="prodPrice" placeholder="145000" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row between" style="margin-bottom:4px;">
+          <label style="margin:0;">Kategori</label>
+          <button type="button" class="btn btn-soft btn-sm" style="padding:3px 8px;font-size:11px;" onclick="openCatManager()">+ Kelola Kategori</button>
+        </div>
+        <select id="prodCategory"></select>
+      </div>
+
+      <div class="form-group">
+        <div class="row between" style="margin-bottom:5px;">
+          <label style="margin:0;">Deskripsi Produk</label>
+          <div class="row" style="gap:6px;">
+            <button type="button" class="btn btn-outline btn-sm" style="padding:4px 8px;font-size:11px;" onclick="fillTemplateDesc()">📝 Template Instan</button>
+            <button type="button" class="btn btn-soft btn-sm" style="padding:4px 8px;font-size:11px;" onclick="generateDescAI()">✨ Bantu Tulis AI</button>
+          </div>
+        </div>
+        <textarea id="prodDesc" placeholder="Tulis keunggulan rasa, ukuran, bahan premium, dan daya tahan kue..."></textarea>
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="saveProduct()">💾 Simpan Produk</button>
+    </div>
+  </div>
+
+  <!-- MODAL: KELOLA KATEGORI -->
+  <div class="modal-backdrop" id="modalCategories">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>🏷️ Kelola Kategori Produk</h3>
+        <button class="close-x" onclick="closeModal('modalCategories')">&times;</button>
+      </div>
+      <div class="row" style="margin-bottom:14px;">
+        <input type="text" id="newCatInput" placeholder="Nama kategori baru (misal: Dessert Box)" style="flex:1;" />
+        <button class="btn btn-primary btn-sm" onclick="addCategory()">Tambah</button>
+      </div>
+      <div id="catManagerList"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: BUAT/EDIT KATALOG -->
+  <div class="modal-backdrop" id="modalCatalog">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="catModalTitle">Buat Katalog Baru</h3>
+        <button class="close-x" onclick="closeModal('modalCatalog')">&times;</button>
+      </div>
+      <input type="hidden" id="editCatId" />
+      <div class="form-group">
+        <label>Judul Katalog</label>
+        <input type="text" id="catTitle" placeholder="Contoh: Katalog Hampers Lebaran 2026" />
+      </div>
+      <div class="form-group">
+        <label>Subjudul / Keterangan Cover</label>
+        <input type="text" id="catSubtitle" placeholder="Pilihan kue premium untuk keluarga &amp; relasi" />
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Tema Visual</label>
+          <select id="catTheme">
+            <option value="warm">Warm Artisan</option>
+            <option value="pastel">Pastel Sweet</option>
+            <option value="minimal">Minimalist Modern</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Produk per Halaman PDF</label>
+          <select id="catPerPage">
+            <option value="4">4 Produk / Halaman (Besar)</option>
+            <option value="6">6 Produk / Halaman (Ringkas)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" style="background:var(--soft);padding:12px;border-radius:10px;">
+        <label style="display:flex;align-items:center;gap:8px;margin:0;cursor:pointer;">
+          <input type="checkbox" id="catEnableCart" checked />
+          <span>Aktifkan Fitur Keranjang Belanja di Link Katalog Online</span>
+        </label>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:4px;">Jika aktif, pembeli bisa pilih beberapa kue sekaligus lalu kirim rincian &amp; total harga otomatis ke WhatsApp admin.</div>
+      </div>
+
+      <div class="form-group">
+        <label>Pilih Produk yang Masuk Katalog Ini</label>
+        <div id="catProdPicker" style="max-height:200px;overflow-y:auto;border:1px solid var(--border);border-radius:10px;padding:8px;"></div>
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="saveCatalog()">💾 Simpan Katalog</button>
+    </div>
+  </div>
+
+  <!-- MODAL: PREVIEW KATALOG ONLINE + KERANJANG WA -->
+  <div class="modal-backdrop" id="modalCatalogPreview">
+    <div class="modal-box wide">
+      <div class="modal-head">
+        <h3 id="previewCatHead">Tampilan Katalog Online</h3>
+        <button class="close-x" onclick="closeModal('modalCatalogPreview')">&times;</button>
+      </div>
+      <div id="previewCatContent"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: BUAT/EDIT PROPOSAL -->
+  <div class="modal-backdrop" id="modalProposal">
+    <div class="modal-box wide">
+      <div class="modal-head">
+        <h3 id="propModalTitle">Buat Proposal Bisnis</h3>
+        <button class="close-x" onclick="closeModal('modalProposal')">&times;</button>
+      </div>
+      <input type="hidden" id="editPropId" />
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Judul Proposal</label>
+          <input type="text" id="propTitle" placeholder="Penawaran Paket Snack Box Rapat &amp; Event" />
+        </div>
+        <div class="form-group">
+          <label>Ditujukan Kepada (Klien / Perusahaan)</label>
+          <input type="text" id="propClient" placeholder="Bagian Umum / HRD PT Maju Bersama" />
+        </div>
+      </div>
+      <div class="row between" style="margin-bottom:12px;background:var(--soft);padding:10px 12px;border-radius:10px;">
+        <div class="row">
+          <select id="propType" style="width:auto;padding:7px 10px;font-size:12.5px;">
+            <option value="snackbox">Snack Box Kantor / Event</option>
+            <option value="konsinyasi">Kerja Sama Konsinyasi Kafe</option>
+            <option value="hampers">Hampers Korporat / Lebaran</option>
+            <option value="investor">Proposal Kerja Sama / Investor</option>
+          </select>
+          <button type="button" class="btn btn-outline btn-sm" onclick="fillProposalTemplate()">📝 Pakai Template</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="generateProposalAI()">✨ Susun Bab dengan AI</button>
+        </div>
+        <label style="display:flex;align-items:center;gap:6px;margin:0;font-size:12.5px;">
+          <input type="checkbox" id="propAttachPrices" checked /> Lampirkan Daftar Harga Produk
+        </label>
+      </div>
+
+      <div id="propSectionsEditor"></div>
+      <button type="button" class="btn btn-outline btn-sm" style="margin-bottom:14px;" onclick="addProposalSection()">+ Tambah Bab</button>
+      <button class="btn btn-primary btn-block" onclick="saveProposal()">💾 Simpan Proposal</button>
+    </div>
+  </div>
+
+  <!-- MODAL: PANDUAN INSTALL ANDROID & IPHONE -->
+  <div class="modal-backdrop" id="modalInstall">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>📲 Install Aplikasi di HP (Android &amp; iPhone)</h3>
+        <button class="close-x" onclick="closeModal('modalInstall')">&times;</button>
+      </div>
+      <div class="card" style="background:var(--soft);border:none;">
+        <h3 style="margin-top:0;">🤖 Pengguna Android (Chrome)</h3>
+        <ol style="margin:0;padding-left:18px;font-size:13.5px;">
+          <li>Buka link aplikasi ini menggunakan browser <strong>Google Chrome</strong>.</li>
+          <li>Ketuk tombol <strong>Install Sekarang</strong> di bawah (atau ketuk titik tiga <strong>⋮</strong> di kanan atas).</li>
+          <li>Pilih <strong>Install aplikasi / Tambahkan ke Layar Utama</strong>.</li>
+        </ol>
+        <button class="btn btn-primary btn-sm" id="modalNativeInstallBtn" style="margin-top:10px;display:none;" onclick="triggerNativeInstall()">⚡ Install Sekarang di Android</button>
+      </div>
+      <div class="card" style="background:#f4f7fb;border:1px solid #dce5f2;margin-bottom:0;">
+        <h3 style="margin-top:0;">🍎 Pengguna iPhone / iPad (Safari)</h3>
+        <ol style="margin:0;padding-left:18px;font-size:13.5px;">
+          <li>Pastikan link aplikasi ini dibuka menggunakan browser <strong>Safari</strong>.</li>
+          <li>Ketuk ikon <strong>Bagikan (Share)</strong> berbentuk kotak dengan panah ke atas di bagian bawah layar.</li>
+          <li>Geser ke bawah lalu ketuk <strong>Tambah ke Layar Utama (Add to Home Screen)</strong>.</li>
+          <li>Ketuk <strong>Tambah (Add)</strong> di pojok kanan atas. Ikon <em>Bakery Studio</em> akan langsung muncul di layar utama iPhone.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINT AREA FOR PDF A4 -->
+  <div id="print-area"></div>
+  <div id="toast"></div>
+
+  <script>
+    // =========================================================================
+    // STATE & DEFAULT DATA
+    // =========================================================================
+    const STORAGE_KEY = 'bakery_studio_pwa_state_v1';
+
+    const DEFAULT_STATE = {
+      brand: {
+        name: 'Dapur Manis Artisan',
+        tagline: 'Freshly Baked Homemade Cakes & Pastry',
+        logo: './icon-192.png',
+        color: '#c26d3a',
+        whatsapp: '6281234567890',
+        instagram: '@dapurmanis.artisan',
+        address: 'Jl. Melati No. 12, Makassar — Pengiriman Instant',
+        poNotes: 'Pemesanan minimal H-2. 100% Halal, dibuat fresh sesuai pesanan tanpa bahan pengawet.'
+      },
+      categories: ['Whole Cake', 'Pastry & Roti', 'Hampers', 'Snack Box'],
+      products: [
+        {
+          id: 'p1', name: 'Burnt Basque Cheesecake 16cm', price: 165000, category: 'Whole Cake',
+          desc: 'Cheesecake lembut dengan pinggiran karamel khas Spanyol menggunakan cream cheese premium.',
+          image: './icon-512.png'
+        },
+        {
+          id: 'p2', name: 'Butter Croissant Box (Isi 4)', price: 78000, category: 'Pastry & Roti',
+          desc: 'Croissant renyah berlapis-lapis dengan 100% French butter asli, dipanggang setiap pagi.',
+          image: './icon-512.png'
+        },
+        {
+          id: 'p3', name: 'Hampers Nastar Wijsman Premium', price: 135000, category: 'Hampers',
+          desc: 'Nastar lumer isi selai nanas madu homemade, lengkap dengan pita dan kartu ucapan.',
+          image: './icon-512.png'
+        },
+        {
+          id: 'p4', name: 'Paket Snack Box Executive (3 Kue + Air)', price: 25000, category: 'Snack Box',
+          desc: 'Cocok untuk rapat kantor dan seminar. Isi: Risoles Ragout, Soes Vla Vanilla, Brownies Bite.',
+          image: './icon-512.png'
+        }
+      ],
+      catalogs: [
+        {
+          id: 'c1', title: 'Katalog Menu Unggulan', subtitle: 'Pilihan cake, pastry, dan hampers terbaik kami',
+          theme: 'warm', perPage: 4, enableCart: true, productIds: ['p1', 'p2', 'p3', 'p4']
+        }
+      ],
+      proposals: [
+        {
+          id: 'pr1', title: 'Penawaran Paket Snack Box Rapat & Event', client: 'Bagian Umum & HRD Perusahaan',
+          attachPrices: true,
+          sections: [
+            { title: '1. Latar Belakang & Profil Singkat', body: 'Kami hadir menyediakan hidangan kue dan pastry homemade berkualitas premium yang higienis, halal, dan selalu dipanggang segar untuk mendukung kelancaran acara perusahaan Anda.' },
+            { title: '2. Keunggulan Layanan Kami', body: '• Bahan baku premium tanpa pengawet\n• Pengiriman tepat waktu sebelum acara dimulai\n• Bisa custom kemasan dengan logo perusahaan\n• Tersedia invoice resmi untuk administrasi kantor' },
+            { title: '3. Ketentuan Pemesanan & Pembayaran', body: 'Pemesanan minimal H-2 sebelum hari acara dengan uang muka (DP) 50%. Pelunasan dilakukan saat pesanan diterima dengan baik.' }
+          ]
+        }
+      ],
+      settings: {
+        workerUrl: '',
+        sbUrl: '',
+        sbKey: '',
+        licenseKey: '',
+        geminiKey: ''
+      }
+    };
+
+    let state = loadState();
+    let activeCatFilter = 'Semua';
+    let rawUploadImg = null;
+    let processedImgData = null;
+    let activeCart = {};
+    let currentPreviewCatId = null;
+    let tempPropSections = [];
+    let deferredPrompt = null;
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return JSON.parse(JSON.stringify(DEFAULT_STATE));
+        const parsed = JSON.parse(saved);
+        return {
+          ...DEFAULT_STATE,
+          ...parsed,
+          brand: { ...DEFAULT_STATE.brand, ...(parsed.brand || {}) },
+          settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) }
+        };
+      } catch {
+        return JSON.parse(JSON.stringify(DEFAULT_STATE));
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      applyTheme();
+      renderAll();
+    }
+
+    function applyTheme() {
+      document.documentElement.style.setProperty('--primary', state.brand.color || '#c26d3a');
+      document.getElementById('sideBrandName').textContent = state.brand.name;
+      document.getElementById('mobBrandName').textContent = state.brand.name;
+      document.getElementById('sideLogo').src = state.brand.logo || './icon-192.png';
+      document.getElementById('mobLogo').src = state.brand.logo || './icon-192.png';
+    }
+
+    function toast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.style.display = 'block';
+      clearTimeout(window._t);
+      window._t = setTimeout(() => { el.style.display = 'none'; }, 2800);
+    }
+
+    function formatRp(n) {
+      return 'Rp ' + (Number(n) || 0).toLocaleString('id-ID');
+    }
+
+    function esc(str) {
+      return String(str || '').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+    }
+
+    // =========================================================================
+    // NAVIGATION & MODALS
+    // =========================================================================
+    function switchTab(tab) {
+      document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
+      const target = document.getElementById('tab-' + tab);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn, .mobile-nav button').forEach(b => {
+        b.classList.toggle('active', b.dataset.tab === tab);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+    function openInstallGuide() { openModal('modalInstall'); }
+
+    // =========================================================================
+    // PWA SERVICE WORKER & INSTALL PROMPT
+    // =========================================================================
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(e => console.warn('SW gagal:', e));
+      });
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('btnNativeInstall').style.display = 'inline-flex';
+      document.getElementById('modalNativeInstallBtn').style.display = 'inline-flex';
+    });
+
+    async function triggerNativeInstall() {
+      if (!deferredPrompt) return openInstallGuide();
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') toast('Aplikasi berhasil dipasang!');
+      deferredPrompt = null;
+      document.getElementById('btnNativeInstall').style.display = 'none';
+      document.getElementById('modalNativeInstallBtn').style.display = 'none';
+    }
+
+    // =========================================================================
+    // RENDER ALL SECTIONS
+    // =========================================================================
+    function renderAll() {
+      renderHome();
+      renderBrandForm();
+      renderProducts();
+      renderCatalogs();
+      renderProposals();
+      renderSettingsForm();
+    }
+
+    function renderHome() {
+      document.getElementById('statProd').textContent = state.products.length;
+      document.getElementById('statCat').textContent = state.catalogs.length;
+      document.getElementById('statProp').textContent = state.proposals.length;
+      document.getElementById('statCloud').textContent = state.settings.sbUrl ? 'Terhubung ✅' : 'Mode Lokal';
+
+      const steps = [
+        { done: state.brand.name !== 'Dapur Manis Artisan', label: '1. Lengkapi Profil Brand & Nomor WhatsApp Toko', tab: 'brand' },
+        { done: state.products.length >= 1, label: '2. Upload Foto Produk Manual (Auto WebP)', tab: 'products' },
+        { done: state.catalogs.length >= 1, label: '3. Buat Katalog Online / Cetak PDF Multi-Halaman', tab: 'catalogs' },
+        { done: !!state.settings.sbUrl, label: '4. Hubungkan Supabase (Opsional untuk Link Publik)', tab: 'settings' }
+      ];
+      document.getElementById('onboardingList').innerHTML = steps.map(s => `
+        <div class="check-item ${s.done ? 'done' : ''}">
+          <span style="font-size:13.5px;font-weight:600;">${s.done ? '✅' : '⬜'} ${s.label}</span>
+          <button class="btn btn-outline btn-sm" onclick="switchTab('${s.tab}')">Buka</button>
+        </div>
+      `).join('');
+    }
+
+    // =========================================================================
+    // BRAND PROFILE
+    // =========================================================================
+    function renderBrandForm() {
+      document.getElementById('brandLogoPreview').src = state.brand.logo || './icon-192.png';
+      document.getElementById('brandName').value = state.brand.name || '';
+      document.getElementById('brandTagline').value = state.brand.tagline || '';
+      document.getElementById('brandColor').value = state.brand.color || '#c26d3a';
+      document.getElementById('brandWa').value = state.brand.whatsapp || '';
+      document.getElementById('brandIg').value = state.brand.instagram || '';
+      document.getElementById('brandAddr').value = state.brand.address || '';
+      document.getElementById('brandPo').value = state.brand.poNotes || '';
+    }
+
+    function setBrandColor(hex) {
+      document.getElementById('brandColor').value = hex;
+    }
+
+    function handleLogoUpload(ev) {
+      const file = ev.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const size = 256;
+          canvas.width = size; canvas.height = size;
+          const ctx = canvas.getContext('2d');
+          const min = Math.min(img.width, img.height);
+          ctx.drawImage(img, (img.width - min)/2, (img.height - min)/2, min, min, 0, 0, size, size);
+          state.brand.logo = canvas.toDataURL('image/webp', 0.85);
+          document.getElementById('brandLogoPreview').src = state.brand.logo;
+          toast('Logo siap disimpan!');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function saveBrand() {
+      state.brand.name = document.getElementById('brandName').value.trim() || 'Toko Kue Saya';
+      state.brand.tagline = document.getElementById('brandTagline').value.trim();
+      state.brand.color = document.getElementById('brandColor').value;
+      state.brand.whatsapp = document.getElementById('brandWa').value.replace(/\D/g, '');
+      state.brand.instagram = document.getElementById('brandIg').value.trim();
+      state.brand.address = document.getElementById('brandAddr').value.trim();
+      state.brand.poNotes = document.getElementById('brandPo').value.trim();
+      saveState();
+      toast('Profil Brand berhasil disimpan!');
+    }
+
+    // =========================================================================
+    // KATEGORI & PRODUK
+    // =========================================================================
+    function openCatManager() {
+      renderCatManager();
+      openModal('modalCategories');
+    }
+
+    function renderCatManager() {
+      const list = document.getElementById('catManagerList');
+      list.innerHTML = state.categories.map((cat, idx) => `
+        <div class="check-item">
+          <span style="font-weight:600;font-size:14px;">${esc(cat)}</span>
+          <div class="row" style="gap:6px;">
+            <button class="btn btn-outline btn-sm" onclick="renameCategory(${idx})">Ubah</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteCategory(${idx})">Hapus</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addCategory() {
+      const input = document.getElementById('newCatInput');
+      const val = input.value.trim();
+      if (!val) return toast('Masukkan nama kategori.');
+      if (state.categories.includes(val)) return toast('Kategori sudah ada.');
+      state.categories.push(val);
+      input.value = '';
+      saveState();
+      renderCatManager();
+      populateCategorySelect();
+      toast('Kategori "' + val + '" ditambahkan!');
+    }
+
+    function renameCategory(idx) {
+      const oldName = state.categories[idx];
+      const newName = prompt('Ubah nama kategori:', oldName);
+      if (!newName || !newName.trim() || newName.trim() === oldName) return;
+      const clean = newName.trim();
+      state.categories[idx] = clean;
+      state.products.forEach(p => { if (p.category === oldName) p.category = clean; });
+      if (activeCatFilter === oldName) activeCatFilter = clean;
+      saveState();
+      renderCatManager();
+      populateCategorySelect();
+      toast('Kategori diubah ke "' + clean + '"');
+    }
+
+    function deleteCategory(idx) {
+      if (state.categories.length <= 1) return toast('Minimal harus ada 1 kategori.');
+      const target = state.categories[idx];
+      if (!confirm('Hapus kategori "' + target + '"?')) return;
+      state.categories.splice(idx, 1);
+      const fallback = state.categories[0];
+      state.products.forEach(p => { if (p.category === target) p.category = fallback; });
+      if (activeCatFilter === target) activeCatFilter = 'Semua';
+      saveState();
+      renderCatManager();
+      populateCategorySelect();
+      toast('Kategori dihapus.');
+    }
+
+    function populateCategorySelect(selected) {
+      const sel = document.getElementById('prodCategory');
+      sel.innerHTML = state.categories.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+      if (selected && state.categories.includes(selected)) sel.value = selected;
+    }
+
+    function renderProducts() {
+      const bar = document.getElementById('catFilterBar');
+      const cats = ['Semua', ...state.categories];
+      bar.innerHTML = cats.map(c => `
+        <button class="chip ${activeCatFilter === c ? 'active' : ''}" onclick="activeCatFilter='${esc(c)}';renderProducts();">${esc(c)}</button>
+      `).join('');
+
+      const q = (document.getElementById('prodSearch').value || '').toLowerCase();
+      const filtered = state.products.filter(p => {
+        const matchCat = activeCatFilter === 'Semua' || p.category === activeCatFilter;
+        const matchQ = p.name.toLowerCase().includes(q) || (p.desc || '').toLowerCase().includes(q);
+        return matchCat && matchQ;
+      });
+
+      const grid = document.getElementById('productGrid');
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="card" style="grid-column:1/-1;text-align:center;color:var(--muted);">Belum ada produk yang cocok. Klik <strong>+ Tambah Produk</strong>.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => `
+        <div class="prod-card">
+          <div class="prod-img-wrap"><img src="${p.image || './icon-512.png'}" alt="${esc(p.name)}" /></div>
+          <div class="prod-body">
+            <div><span class="badge">${esc(p.category)}</span></div>
+            <div class="prod-title">${esc(p.name)}</div>
+            <div class="prod-price">${formatRp(p.price)}</div>
+            <p class="prod-desc">${esc(p.desc)}</p>
+            <div class="row">
+              <button class="btn btn-outline btn-sm" style="flex:1;" onclick="openProductModal('${p.id}')">✏️ Edit</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteProduct('${p.id}')">🗑️</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openProductModal(id = null) {
+      rawUploadImg = null;
+      document.getElementById('imgCompressInfo').textContent = '';
+      document.getElementById('prodImgFile').value = '';
+      document.getElementById('prodFilter').value = 'none';
+      document.getElementById('prodWatermark').checked = false;
+
+      if (id) {
+        const p = state.products.find(x => x.id === id);
+        if (!p) return;
+        document.getElementById('prodModalTitle').textContent = 'Edit Produk';
+        document.getElementById('editProdId').value = p.id;
+        document.getElementById('prodName').value = p.name;
+        document.getElementById('prodPrice').value = p.price;
+        populateCategorySelect(p.category);
+        document.getElementById('prodDesc').value = p.desc || '';
+        processedImgData = p.image || './icon-512.png';
+        document.getElementById('prodImgPreview').src = processedImgData;
+      } else {
+        document.getElementById('prodModalTitle').textContent = 'Tambah Produk Baru';
+        document.getElementById('editProdId').value = '';
+        document.getElementById('prodName').value = '';
+        document.getElementById('prodPrice').value = '';
+        populateCategorySelect();
+        document.getElementById('prodDesc').value = '';
+        processedImgData = './icon-512.png';
+        document.getElementById('prodImgPreview').src = processedImgData;
+      }
+      openModal('modalProduct');
+    }
+
+    function handleProductImage(ev) {
+      const file = ev.target.files[0];
+      if (!file) return;
+      const origKB = Math.round(file.size / 1024);
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+          rawUploadImg = { img, origKB };
+          reprocessProductImage();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function reprocessProductImage() {
+      if (!rawUploadImg) return;
+      const { img, origKB } = rawUploadImg;
+      const canvas = document.createElement('canvas');
+      const size = 800;
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+
+      const f = document.getElementById('prodFilter').value;
+      if (f === 'bright') ctx.filter = 'brightness(1.1) contrast(1.05)';
+      else if (f === 'warm') ctx.filter = 'sepia(0.18) saturate(1.22) brightness(1.05)';
+      else if (f === 'crisp') ctx.filter = 'contrast(1.16) saturate(1.12)';
+      else ctx.filter = 'none';
+
+      const min = Math.min(img.width, img.height);
+      ctx.drawImage(img, (img.width - min)/2, (img.height - min)/2, min, min, 0, 0, size, size);
+      ctx.filter = 'none';
+
+      if (document.getElementById('prodWatermark').checked) {
+        ctx.fillStyle = 'rgba(0,0,0,0.45)';
+        ctx.fillRect(0, size - 48, size, 48);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 22px sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(state.brand.name + '  ', size - 14, size - 17);
+      }
+
+      processedImgData = canvas.toDataURL('image/webp', 0.8);
+      document.getElementById('prodImgPreview').src = processedImgData;
+      const newKB = Math.round((processedImgData.length * 3 / 4) / 1024);
+      document.getElementById('imgCompressInfo').textContent = `Dikompres WebP: ${origKB} KB → ${newKB} KB`;
+    }
+
+    function fillTemplateDesc() {
+      const name = document.getElementById('prodName').value.trim() || 'Kue Spesial';
+      const cat = document.getElementById('prodCategory').value;
+      document.getElementById('prodDesc').value = `${name} (${cat}) dibuat fresh homemade menggunakan bahan berkualitas premium dan 100% halal. Tekstur lembut, rasa pas tidak bikin eneg, cocok untuk dinikmati bersama keluarga maupun hantaran spesial.`;
+      toast('Template deskripsi diterapkan.');
+    }
+
+    async function generateDescAI() {
+      const name = document.getElementById('prodName').value.trim();
+      if (!name) return toast('Isi nama produk terlebih dahulu.');
+      const cat = document.getElementById('prodCategory').value;
+      const prompt = `Buat deskripsi produk bakery singkat (2-3 kalimat) yang menggugah selera dalam bahasa Indonesia untuk "${name}" kategori "${cat}" milik toko "${state.brand.name}". Tanpa tanda bintang markdown.`;
+      try {
+        toast('Sedang merangkai deskripsi dengan AI...');
+        const txt = await callAI(prompt);
+        document.getElementById('prodDesc').value = txt.trim();
+        toast('Deskripsi AI berhasil dibuat!');
+      } catch (err) {
+        toast(err.message);
+      }
+    }
+
+    function saveProduct() {
+      const name = document.getElementById('prodName').value.trim();
+      const price = Number(document.getElementById('prodPrice').value);
+      if (!name || !price) return toast('Nama produk dan harga wajib diisi.');
+
+      const id = document.getElementById('editProdId').value || ('p' + Date.now());
+      const obj = {
+        id,
+        name,
+        price,
+        category: document.getElementById('prodCategory').value,
+        desc: document.getElementById('prodDesc').value.trim(),
+        image: processedImgData || './icon-512.png'
+      };
+
+      const idx = state.products.findIndex(x => x.id === id);
+      if (idx >= 0) state.products[idx] = obj;
+      else state.products.unshift(obj);
+
+      saveState();
+      closeModal('modalProduct');
+      toast('Produk berhasil disimpan!');
+    }
+
+    function deleteProduct(id) {
+      if (!confirm('Hapus produk ini?')) return;
+      state.products = state.products.filter(p => p.id !== id);
+      state.catalogs.forEach(c => { c.productIds = c.productIds.filter(pid => pid !== id); });
+      saveState();
+      toast('Produk dihapus.');
+    }
+
+    // =========================================================================
+    // MULTI-KATALOG & KERANJANG WHATSAPP OPSIONAL
+    // =========================================================================
+    function renderCatalogs() {
+      const el = document.getElementById('catalogList');
+      if (!state.catalogs.length) {
+        el.innerHTML = `<div class="card" style="grid-column:1/-1;text-align:center;color:var(--muted);">Belum ada katalog. Klik <strong>+ Buat Katalog Baru</strong>.</div>`;
+        return;
+      }
+      el.innerHTML = state.catalogs.map(c => `
+        <div class="card">
+          <div class="row between" style="margin-bottom:6px;">
+            <h3 style="margin:0;">${esc(c.title)}</h3>
+            <span class="badge ${c.enableCart ? 'badge-green' : ''}">${c.enableCart ? '🛒 Keranjang WA Aktif' : '💬 WA Langsung'}</span>
+          </div>
+          <p style="font-size:13px;color:var(--muted);margin:0 0 10px;">${esc(c.subtitle || '-')} • <strong>${c.productIds.length} produk</strong> • ${c.perPage} produk/hal PDF</p>
+          <div class="row">
+            <button class="btn btn-primary btn-sm" onclick="openCatalogPreview('${c.id}')">👁️ Buka Katalog</button>
+            <button class="btn btn-soft btn-sm" onclick="printCatalogPDF('${c.id}')">📄 Cetak PDF A4</button>
+            <button class="btn btn-outline btn-sm" onclick="copyCatalogLink('${c.id}')">🔗 Salin Link</button>
+            <button class="btn btn-outline btn-sm" onclick="openCatalogModal('${c.id}')">✏️</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteCatalog('${c.id}')">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openCatalogModal(id = null) {
+      const picker = document.getElementById('catProdPicker');
+      const existing = id ? state.catalogs.find(x => x.id === id) : null;
+      document.getElementById('catModalTitle').textContent = existing ? 'Edit Katalog' : 'Buat Katalog Baru';
+      document.getElementById('editCatId').value = existing ? existing.id : '';
+      document.getElementById('catTitle').value = existing ? existing.title : '';
+      document.getElementById('catSubtitle').value = existing ? existing.subtitle : '';
+      document.getElementById('catTheme').value = existing ? existing.theme : 'warm';
+      document.getElementById('catPerPage').value = existing ? existing.perPage : 4;
+      document.getElementById('catEnableCart').checked = existing ? !!existing.enableCart : true;
+
+      const selectedIds = existing ? existing.productIds : state.products.map(p => p.id);
+      picker.innerHTML = state.products.map(p => `
+        <label style="display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid var(--border);margin:0;font-weight:500;">
+          <input type="checkbox" class="cat-prod-cb" value="${p.id}" ${selectedIds.includes(p.id) ? 'checked' : ''} />
+          <span>${esc(p.name)} — <strong>${formatRp(p.price)}</strong></span>
+        </label>
+      `).join('') || '<div style="font-size:12px;color:var(--muted);">Belum ada produk di Bank Produk.</div>';
+
+      openModal('modalCatalog');
+    }
+
+    function saveCatalog() {
+      const title = document.getElementById('catTitle').value.trim();
+      if (!title) return toast('Judul katalog wajib diisi.');
+      const productIds = Array.from(document.querySelectorAll('.cat-prod-cb:checked')).map(cb => cb.value);
+      if (!productIds.length) return toast('Pilih minimal 1 produk.');
+
+      const id = document.getElementById('editCatId').value || ('c' + Date.now());
+      const obj = {
+        id,
+        title,
+        subtitle: document.getElementById('catSubtitle').value.trim(),
+        theme: document.getElementById('catTheme').value,
+        perPage: Number(document.getElementById('catPerPage').value) || 4,
+        enableCart: document.getElementById('catEnableCart').checked,
+        productIds
+      };
+
+      const idx = state.catalogs.findIndex(x => x.id === id);
+      if (idx >= 0) state.catalogs[idx] = obj;
+      else state.catalogs.unshift(obj);
+
+      saveState();
+      closeModal('modalCatalog');
+      toast('Katalog disimpan!');
+    }
+
+    function deleteCatalog(id) {
+      if (!confirm('Hapus katalog ini?')) return;
+      state.catalogs = state.catalogs.filter(c => c.id !== id);
+      saveState();
+      toast('Katalog dihapus.');
+    }
+
+    function copyCatalogLink(id) {
+      const base = window.location.origin + window.location.pathname;
+      const url = `${base}?mode=katalog&id=${encodeURIComponent(id)}`;
+      navigator.clipboard.writeText(url).then(() => toast('Link katalog berhasil disalin!'));
+    }
+
+    function openCatalogPreview(id) {
+      currentPreviewCatId = id;
+      activeCart = {};
+      renderCatalogPreviewBody();
+      openModal('modalCatalogPreview');
+    }
+
+    function renderCatalogPreviewBody() {
+      const cat = state.catalogs.find(x => x.id === currentPreviewCatId);
+      if (!cat) return;
+      document.getElementById('previewCatHead').textContent = cat.title;
+
+      const items = cat.productIds.map(pid => state.products.find(p => p.id === pid)).filter(Boolean);
+      const wa = state.brand.whatsapp || '6281234567890';
+
+      let html = `
+        <div style="text-align:center;padding:18px;background:var(--soft);border-radius:14px;margin-bottom:16px;">
+          <img src="${state.brand.logo}" style="width:64px;height:64px;border-radius:14px;object-fit:cover;margin-bottom:8px;" />
+          <h2 style="margin:0;color:var(--primary);">${esc(state.brand.name)}</h2>
+          <div style="font-size:13px;color:var(--muted);">${esc(cat.subtitle || state.brand.tagline)}</div>
+        </div>
+        <div class="grid-2">
+      `;
+
+      items.forEach(p => {
+        const qty = activeCart[p.id] || 0;
+        const directMsg = encodeURIComponent(`Halo ${state.brand.name}, saya ingin memesan *${p.name}* (${formatRp(p.price)}).`);
+        html += `
+          <div class="prod-card">
+            <div class="prod-img-wrap"><img src="${p.image}" alt="${esc(p.name)}" /></div>
+            <div class="prod-body">
+              <div class="prod-title">${esc(p.name)}</div>
+              <div class="prod-price">${formatRp(p.price)}</div>
+              <p class="prod-desc">${esc(p.desc)}</p>
+              ${cat.enableCart ? `
+                <div class="row between">
+                  ${qty === 0
+                    ? `<button class="btn btn-primary btn-sm btn-block" onclick="updateCart('${p.id}', 1)">+ Tambah ke Keranjang</button>`
+                    : `<div class="row between" style="width:100%;">
+                        <button class="btn btn-outline btn-sm" onclick="updateCart('${p.id}', -1)">−</button>
+                        <strong>${qty} pcs</strong>
+                        <button class="btn btn-primary btn-sm" onclick="updateCart('${p.id}', 1)">+</button>
+                       </div>`
+                  }
+                </div>
+              ` : `
+                <a class="btn btn-success btn-sm btn-block" target="_blank" href="https://wa.me/${wa}?text=${directMsg}">💬 Pesan via WhatsApp</a>
+              `}
+            </div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+
+      // Cart Summary & Checkout WA
+      if (cat.enableCart) {
+        const cartEntries = Object.entries(activeCart).filter(([, q]) => q > 0);
+        const totalQty = cartEntries.reduce((s, [, q]) => s + q, 0);
+        const totalRp = cartEntries.reduce((s, [pid, q]) => {
+          const p = state.products.find(x => x.id === pid);
+          return s + (p ? p.price * q : 0);
+        }, 0);
+
+        if (totalQty > 0) {
+          html += `
+            <div class="card" style="margin-top:16px;border:2px solid var(--primary);">
+              <h3 style="margin-top:0;">🛒 Ringkasan Keranjang (${totalQty} item)</h3>
+              <div class="grid-2">
+                <div class="form-group"><label>Nama Pemesan</label><input type="text" id="cartBuyerName" placeholder="Nama Anda" /></div>
+                <div class="form-group"><label>Catatan / Tanggal Ambil</label><input type="text" id="cartBuyerNote" placeholder="Contoh: Ambil besok jam 10 pagi" /></div>
+              </div>
+              <div class="row between">
+                <div style="font-size:16px;font-weight:800;color:var(--primary);">Total: ${formatRp(totalRp)}</div>
+                <button class="btn btn-success" onclick="checkoutCartWA()">💬 Kirim Pesanan ke WhatsApp</button>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      html += `
+        <div style="margin-top:16px;padding:12px;background:#faf6f0;border-radius:10px;font-size:12.5px;color:var(--muted);">
+          <strong>Info Pemesanan:</strong> ${esc(state.brand.poNotes)}<br/>
+          📍 ${esc(state.brand.address)} • 📱 ${esc(state.brand.instagram)}
+        </div>
+      `;
+
+      document.getElementById('previewCatContent').innerHTML = html;
+    }
+
+    function updateCart(pid, delta) {
+      activeCart[pid] = Math.max(0, (activeCart[pid] || 0) + delta);
+      if (activeCart[pid] === 0) delete activeCart[pid];
+      renderCatalogPreviewBody();
+    }
+
+    function checkoutCartWA() {
+      const cat = state.catalogs.find(x => x.id === currentPreviewCatId);
+      const buyer = (document.getElementById('cartBuyerName')?.value || '').trim() || 'Pelanggan';
+      const note = (document.getElementById('cartBuyerNote')?.value || '').trim() || '-';
+      let lines = [`Halo *${state.brand.name}*, saya ingin memesan dari *${cat.title}*:`, ''];
+      let total = 0;
+      Object.entries(activeCart).forEach(([pid, q], i) => {
+        const p = state.products.find(x => x.id === pid);
+        if (!p || q <= 0) return;
+        const sub = p.price * q;
+        total += sub;
+        lines.push(`${i + 1}. ${p.name} (${q}x ${formatRp(p.price)}) = *${formatRp(sub)}*`);
+      });
+      lines.push('', `*Total Estimasi: ${formatRp(total)}*`, `Nama: ${buyer}`, `Catatan: ${note}`);
+      const wa = state.brand.whatsapp || '6281234567890';
+      window.open(`https://wa.me/${wa}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+    }
+
+    function printCatalogPDF(id) {
+      const cat = state.catalogs.find(x => x.id === id);
+      if (!cat) return;
+      const items = cat.productIds.map(pid => state.products.find(p => p.id === pid)).filter(Boolean);
+      const perPage = cat.perPage || 4;
+      const chunks = [];
+      for (let i = 0; i < items.length; i += perPage) chunks.push(items.slice(i, i + perPage));
+      const totalPages = chunks.length + 2;
+
+      let html = `
+        <div class="pdf-page pdf-cover">
+          <img src="${state.brand.logo}" style="width:110px;height:110px;border-radius:20px;object-fit:cover;margin-bottom:18px;" />
+          <div style="font-size:14px;letter-spacing:2px;text-transform:uppercase;color:#766458;">${esc(state.brand.name)}</div>
+          <h1 style="font-size:34px;color:var(--primary);margin:10px 0;">${esc(cat.title)}</h1>
+          <p style="font-size:16px;color:#555;max-width:440px;">${esc(cat.subtitle || state.brand.tagline)}</p>
+          <div style="margin-top:40px;font-size:13px;color:#666;">
+            WhatsApp: +${esc(state.brand.whatsapp)} • ${esc(state.brand.instagram)}<br/>${esc(state.brand.address)}
+          </div>
+        </div>
+      `;
+
+      chunks.forEach((group, idx) => {
+        html += `
+          <div class="pdf-page">
+            <div>
+              <div class="pdf-header">
+                <strong>${esc(state.brand.name)} — ${esc(cat.title)}</strong>
+                <span>Halaman ${idx + 2} dari ${totalPages}</span>
+              </div>
+              <div class="${perPage === 6 ? 'pdf-grid-6' : 'pdf-grid-4'}">
+                ${group.map(p => `
+                  <div class="pdf-card">
+                    <img src="${p.image}" />
+                    <div style="font-size:11px;color:#888;margin-top:6px;">${esc(p.category)}</div>
+                    <div style="font-weight:700;font-size:14px;margin:2px 0;">${esc(p.name)}</div>
+                    <div style="font-weight:800;color:var(--primary);font-size:14px;margin-bottom:4px;">${formatRp(p.price)}</div>
+                    <div style="font-size:11.5px;color:#555;">${esc(p.desc)}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div class="pdf-footer">
+              <span>${esc(state.brand.name)}</span>
+              <span>WA: +${esc(state.brand.whatsapp)}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      html += `
+        <div class="pdf-page pdf-cover">
+          <h2 style="color:var(--primary);font-size:26px;">Cara Pemesanan</h2>
+          <p style="max-width:460px;font-size:15px;color:#444;">${esc(state.brand.poNotes)}</p>
+          <div style="margin-top:20px;padding:18px 28px;background:#fff;border:1px solid #ddd;border-radius:12px;">
+            <div style="font-weight:800;font-size:18px;color:var(--primary);">WhatsApp: +${esc(state.brand.whatsapp)}</div>
+            <div style="margin-top:6px;font-size:14px;">Instagram: ${esc(state.brand.instagram)}</div>
+            <div style="margin-top:4px;font-size:13px;color:#666;">${esc(state.brand.address)}</div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('print-area').innerHTML = html;
+      setTimeout(() => window.print(), 200);
+    }
+
+    // =========================================================================
+    // PROPOSAL BISNIS
+    // =========================================================================
+    function renderProposals() {
+      const el = document.getElementById('proposalList');
+      if (!state.proposals.length) {
+        el.innerHTML = `<div class="card" style="grid-column:1/-1;text-align:center;color:var(--muted);">Belum ada proposal. Klik <strong>+ Buat Proposal Baru</strong>.</div>`;
+        return;
+      }
+      el.innerHTML = state.proposals.map(pr => `
+        <div class="card">
+          <h3 style="margin:0 0 4px;">${esc(pr.title)}</h3>
+          <div style="font-size:13px;color:var(--muted);margin-bottom:10px;">Kepada: <strong>${esc(pr.client)}</strong> • ${pr.sections.length} Bab</div>
+          <div class="row">
+            <button class="btn btn-primary btn-sm" onclick="printProposalPDF('${pr.id}')">📄 Cetak PDF A4</button>
+            <button class="btn btn-outline btn-sm" onclick="openProposalModal('${pr.id}')">✏️ Edit Bab</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteProposal('${pr.id}')">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openProposalModal(id = null) {
+      const ex = id ? state.proposals.find(x => x.id === id) : null;
+      document.getElementById('propModalTitle').textContent = ex ? 'Edit Proposal' : 'Buat Proposal Bisnis';
+      document.getElementById('editPropId').value = ex ? ex.id : '';
+      document.getElementById('propTitle').value = ex ? ex.title : '';
+      document.getElementById('propClient').value = ex ? ex.client : '';
+      document.getElementById('propAttachPrices').checked = ex ? !!ex.attachPrices : true;
+      tempPropSections = ex ? JSON.parse(JSON.stringify(ex.sections)) : [
+        { title: '1. Pendahuluan', body: '' },
+        { title: '2. Penawaran & Keunggulan', body: '' },
+        { title: '3. Ketentuan Kerja Sama', body: '' }
+      ];
+      renderPropSectionsEditor();
+      openModal('modalProposal');
+    }
+
+    function renderPropSectionsEditor() {
+      document.getElementById('propSectionsEditor').innerHTML = tempPropSections.map((s, i) => `
+        <div class="card" style="padding:12px;background:#fcfaf7;">
+          <div class="row between" style="margin-bottom:6px;">
+            <input type="text" value="${esc(s.title)}" oninput="tempPropSections[${i}].title=this.value" placeholder="Judul Bab" style="flex:1;font-weight:700;" />
+            <button type="button" class="btn btn-danger btn-sm" onclick="tempPropSections.splice(${i},1);renderPropSectionsEditor();">Hapus</button>
+          </div>
+          <textarea oninput="tempPropSections[${i}].body=this.value" placeholder="Isi bab proposal...">${esc(s.body)}</textarea>
+        </div>
+      `).join('');
+    }
+
+    function addProposalSection() {
+      tempPropSections.push({ title: `${tempPropSections.length + 1}. Bab Baru`, body: '' });
+      renderPropSectionsEditor();
+    }
+
+    function fillProposalTemplate() {
+      const type = document.getElementById('propType').value;
+      const b = state.brand.name;
+      const presets = {
+        snackbox: {
+          title: 'Penawaran Pengadaan Snack Box & Coffee Break',
+          sections: [
+            { title: '1. Pendahuluan & Profil Usaha', body: `${b} adalah usaha bakery homemade yang menyediakan aneka kue basah, pastry, dan cake segar dengan standar kebersihan tinggi serta 100% halal untuk kebutuhan rapat, seminar, dan acara instansi.` },
+            { title: '2. Keunggulan Layanan', body: '• Dipanggang fresh di hari pengiriman\n• Pengemasan rapi & eksklusif\n• Pengiriman tepat waktu ke lokasi acara\n• Tersedia nota/invoice resmi' },
+            { title: '3. Mekanisme Pemesanan', body: 'Pemesanan minimal 20 box paling lambat H-2. Pembayaran DP 50% dan pelunasan saat barang diterima.' }
+          ]
+        },
+        konsinyasi: {
+          title: 'Proposal Kerja Sama Konsinyasi Pastry & Cake',
+          sections: [
+            { title: '1. Latar Belakang Kerja Sama', body: `${b} menawarkan suplai cake & pastry artisan berkualitas kafe untuk melengkapi menu pendamping kopi di outlet Anda tanpa perlu menambah biaya produksi dapur.` },
+            { title: '2. Skema Bagi Hasil & Pengiriman', body: '• Harga khusus mitra / margin menarik 20–30%\n• Pengiriman rutin terjadwal\n• Laporan rekap penjualan mingguan yang transparan' },
+            { title: '3. Penutup', body: 'Kami siap mengirimkan sampel produk gratis (tester) agar tim Anda dapat mencoba langsung kualitas rasa kami.' }
+          ]
+        },
+        hampers: {
+          title: 'Penawaran Corporate Hampers & Gift Box',
+          sections: [
+            { title: '1. Tentang Koleksi Hampers', body: `${b} menghadirkan paket hampers kue kering dan cake premium dengan kemasan elegan yang cocok untuk klien VIP, mitra bisnis, maupun karyawan perusahaan.` },
+            { title: '2. Fasilitas Custom Korporat', body: '• Gratis kartu ucapan dengan logo perusahaan\n• Diskon khusus pemesanan di atas 25 paket\n• Pengiriman langsung ke beberapa alamat tujuan' }
+          ]
+        },
+        investor: {
+          title: 'Proposal Pengembangan Usaha & Kemitraan',
+          sections: [
+            { title: '1. Ringkasan Eksekutif', body: `${b} memiliki basis pelanggan setia dengan permintaan rutin pada segmen whole cake, pastry harian, dan hampers musiman.` },
+            { title: '2. Rencana Penggunaan Dana', body: 'Dana kerja sama akan dialokasikan untuk peningkatan kapasitas oven/mixer, perluasan pemasaran digital, dan modal bahan baku.' },
+            { title: '3. Proyeksi & Bagi Hasil', body: 'Laporan keuangan dicatat transparan setiap bulan dengan skema bagi hasil yang disepakati bersama secara tertulis.' }
+          ]
+        }
+      };
+      const p = presets[type];
+      if (!document.getElementById('propTitle').value) document.getElementById('propTitle').value = p.title;
+      tempPropSections = JSON.parse(JSON.stringify(p.sections));
+      renderPropSectionsEditor();
+      toast('Template proposal diterapkan!');
+    }
+
+    async function generateProposalAI() {
+      const title = document.getElementById('propTitle').value.trim() || 'Penawaran Produk Bakery';
+      const client = document.getElementById('propClient').value.trim() || 'Calon Mitra';
+      const type = document.getElementById('propType').value;
+      const prompt = `Buatkan 3 bab proposal bisnis singkat profesional dalam format JSON murni array [{"title":"...","body":"..."}] untuk usaha bakery "${state.brand.name}" berjudul "${title}" kepada "${client}" jenis "${type}". Jangan pakai markdown fence.`;
+      try {
+        toast('AI sedang menyusun bab proposal...');
+        const raw = await callAI(prompt);
+        const clean = raw.replace(/```json|```/g, '').trim();
+        const parsed = JSON.parse(clean);
+        if (Array.isArray(parsed) && parsed.length) {
+          tempPropSections = parsed;
+          renderPropSectionsEditor();
+          toast('Bab proposal berhasil disusun AI!');
+        }
+      } catch (err) {
+        toast(err.message);
+      }
+    }
+
+    function saveProposal() {
+      const title = document.getElementById('propTitle').value.trim();
+      if (!title) return toast('Judul proposal wajib diisi.');
+      const id = document.getElementById('editPropId').value || ('pr' + Date.now());
+      const obj = {
+        id,
+        title,
+        client: document.getElementById('propClient').value.trim() || 'Bapak/Ibu Pimpinan',
+        attachPrices: document.getElementById('propAttachPrices').checked,
+        sections: tempPropSections
+      };
+      const idx = state.proposals.findIndex(x => x.id === id);
+      if (idx >= 0) state.proposals[idx] = obj;
+      else state.proposals.unshift(obj);
+      saveState();
+      closeModal('modalProposal');
+      toast('Proposal disimpan!');
+    }
+
+    function deleteProposal(id) {
+      if (!confirm('Hapus proposal ini?')) return;
+      state.proposals = state.proposals.filter(x => x.id !== id);
+      saveState();
+      toast('Proposal dihapus.');
+    }
+
+    function printProposalPDF(id) {
+      const pr = state.proposals.find(x => x.id === id);
+      if (!pr) return;
+      let priceTable = '';
+      if (pr.attachPrices && state.products.length) {
+        priceTable = `
+          <h3 style="color:var(--primary);margin-top:18px;">Lampiran Daftar Harga Produk</h3>
+          <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+            <thead><tr style="background:#faf6f0;"><th style="border:1px solid #ddd;padding:6px;text-align:left;">Produk</th><th style="border:1px solid #ddd;padding:6px;text-align:left;">Kategori</th><th style="border:1px solid #ddd;padding:6px;text-align:right;">Harga</th></tr></thead>
+            <tbody>
+              ${state.products.map(p => `<tr><td style="border:1px solid #ddd;padding:6px;">${esc(p.name)}</td><td style="border:1px solid #ddd;padding:6px;">${esc(p.category)}</td><td style="border:1px solid #ddd;padding:6px;text-align:right;">${formatRp(p.price)}</td></tr>`).join('')}
+            </tbody>
+          </table>
+        `;
+      }
+
+      document.getElementById('print-area').innerHTML = `
+        <div class="pdf-page">
+          <div>
+            <div style="display:flex;align-items:center;gap:14px;border-bottom:3px solid var(--primary);padding-bottom:12px;margin-bottom:18px;">
+              <img src="${state.brand.logo}" style="width:60px;height:60px;border-radius:10px;object-fit:cover;" />
+              <div>
+                <h2 style="margin:0;color:var(--primary);">${esc(state.brand.name)}</h2>
+                <div style="font-size:12px;color:#666;">${esc(state.brand.address)} • WA: +${esc(state.brand.whatsapp)}</div>
+              </div>
+            </div>
+            <h1 style="font-size:22px;margin:0 0 6px;">${esc(pr.title)}</h1>
+            <div style="font-size:13px;color:#555;margin-bottom:18px;">Kepada Yth: <strong>${esc(pr.client)}</strong></div>
+            ${pr.sections.map(s => `
+              <div style="margin-bottom:14px;break-inside:avoid;">
+                <h3 style="margin:0 0 4px;color:var(--primary);font-size:15px;">${esc(s.title)}</h3>
+                <div style="font-size:13px;white-space:pre-line;color:#333;">${esc(s.body)}</div>
+              </div>
+            `).join('')}
+            ${priceTable}
+          </div>
+          <div style="margin-top:30px;display:flex;justify-content:flex-end;">
+            <div style="text-align:center;width:210px;">
+              <div style="font-size:12.5px;">Hormat kami,</div>
+              <div style="height:56px;"></div>
+              <div style="font-weight:700;border-top:1px solid #333;padding-top:4px;">${esc(state.brand.name)}</div>
+            </div>
+          </div>
+        </div>
+      `;
+      setTimeout(() => window.print(), 200);
+    }
+
+    // =========================================================================
+    // CLOUD (SUPABASE OAUTH / MANUAL) & AI CALLER
+    // =========================================================================
+    function renderSettingsForm() {
+      document.getElementById('workerUrlInput').value = state.settings.workerUrl || '';
+      document.getElementById('sbUrlInput').value = state.settings.sbUrl || '';
+      document.getElementById('sbKeyInput').value = state.settings.sbKey || '';
+      document.getElementById('licenseKeyInput').value = state.settings.licenseKey || '';
+      document.getElementById('geminiKeyInput').value = state.settings.geminiKey || '';
+    }
+
+    function loginSupabaseOAuth() {
+      const worker = document.getElementById('workerUrlInput').value.trim().replace(/\/$/, '');
+      if (!worker) return toast('Isi URL Cloudflare Worker terlebih dahulu.');
+      state.settings.workerUrl = worker;
+      saveState();
+      window.location.href = `${worker}/auth/supabase`;
+    }
+
+    async function saveSupabaseManual() {
+      const worker = document.getElementById('workerUrlInput').value.trim().replace(/\/$/, '');
+      const sbUrl = document.getElementById('sbUrlInput').value.trim().replace(/\/$/, '');
+      const sbKey = document.getElementById('sbKeyInput').value.trim();
+      state.settings.workerUrl = worker;
+      state.settings.sbUrl = sbUrl;
+      state.settings.sbKey = sbKey;
+      saveState();
+
+      if (worker && sbUrl && sbKey) {
+        try {
+          await fetch(`${worker}/register-ping`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ supabaseUrl: sbUrl, anonKey: sbKey })
+          });
+          toast('Supabase tersimpan & Auto-Ping 3 hari aktif!');
+        } catch {
+          toast('Supabase tersimpan secara lokal.');
+        }
+      } else {
+        toast('Pengaturan Supabase disimpan.');
+      }
+    }
+
+    function copySqlSetup() {
+      const sql = `CREATE TABLE IF NOT EXISTS public.brand_profile (id text PRIMARY KEY DEFAULT 'main', name text, tagline text, logo_url text, theme_color text, whatsapp text, instagram text, address text, po_notes text, updated_at timestamptz DEFAULT now());
+CREATE TABLE IF NOT EXISTS public.products (id text PRIMARY KEY, name text, price numeric, category text, description text, image_url text, created_at timestamptz DEFAULT now());
+CREATE TABLE IF NOT EXISTS public.catalogs (id text PRIMARY KEY, title text, slug text, theme text, cover_url text, items_json jsonb, is_active boolean DEFAULT true, created_at timestamptz DEFAULT now());
+CREATE TABLE IF NOT EXISTS public.proposals (id text PRIMARY KEY, title text, client_name text, sections_json jsonb, created_at timestamptz DEFAULT now());
+INSERT INTO storage.buckets (id, name, public) VALUES ('bakery-assets', 'bakery-assets', true) ON CONFLICT (id) DO NOTHING;`;
+      navigator.clipboard.writeText(sql).then(() => toast('Script SQL Supabase disalin!'));
+    }
+
+    function saveAiSettings() {
+      state.settings.workerUrl = document.getElementById('workerUrlInput').value.trim().replace(/\/$/, '');
+      state.settings.licenseKey = document.getElementById('licenseKeyInput').value.trim();
+      state.settings.geminiKey = document.getElementById('geminiKeyInput').value.trim();
+      saveState();
+      toast('Pengaturan AI disimpan!');
+    }
+
+    async function callAI(promptText) {
+      const { workerUrl, licenseKey, geminiKey } = state.settings;
+      if (workerUrl && licenseKey) {
+        const res = await fetch(`${workerUrl}/ai/generate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ licenseKey, prompt: promptText })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Gagal memanggil AI lisensi.');
+        return data.text;
+      }
+      if (geminiKey) {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error('Kunci AI Gemini tidak valid atau kuota habis.');
+        return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      }
+      throw new Error('Isi Kode Lisensi atau Kunci AI di menu Cloud & AI terlebih dahulu (atau gunakan Template Instan).');
+    }
+
+    // =========================================================================
+    // BACKUP JSON & OAUTH CALLBACK HANDLER
+    // =========================================================================
+    function exportBackup() {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `backup-bakery-studio-${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      toast('File backup JSON diunduh.');
+    }
+
+    function importBackup(ev) {
+      const file = ev.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (!parsed.brand || !Array.isArray(parsed.products)) throw new Error();
+          state = parsed;
+          saveState();
+          toast('Data backup berhasil dipulihkan!');
+        } catch {
+          toast('File JSON tidak valid.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Tangkap hasil OAuth Supabase & Link Katalog Publik
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = new URLSearchParams(window.location.hash.substring(1));
+      if (hash.get('supabase_connected') === '1') {
+        state.settings.sbUrl = hash.get('sb_url') || '';
+        state.settings.sbKey = hash.get('sb_key') || '';
+        history.replaceState(null, '', window.location.pathname);
+        saveState();
+        toast('Supabase terhubung otomatis & anti-pause aktif!');
+      } else if (hash.get('oauth_error')) {
+        toast('Gagal login Supabase: ' + hash.get('oauth_error'));
+        history.replaceState(null, '', window.location.pathname);
+      }
+
+      applyTheme();
+      renderAll();
+
+      // Jika dibuka lewat link katalog langsung (?mode=katalog&id=...)
+      const qs = new URLSearchParams(window.location.search);
+      if (qs.get('mode') === 'katalog' && qs.get('id')) {
+        openCatalogPreview(qs.get('id'));
+      }
+    });
+  </script>
+</body>
+</html>

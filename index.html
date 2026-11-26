@@ -46,11 +46,7 @@
       min-height: 100vh;
     }
 
-    /* Layout */
-    .app-shell {
-      display: flex;
-      min-height: 100vh;
-    }
+    .app-shell { display: flex; min-height: 100vh; }
 
     .sidebar {
       width: 260px;
@@ -67,35 +63,18 @@
     }
 
     .brand-mini {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 8px 18px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+      padding: 6px 8px 18px; border-bottom: 1px solid var(--border); margin-bottom: 14px;
     }
-    .brand-mini img {
-      width: 40px; height: 40px; border-radius: 10px; object-fit: cover; background: var(--soft);
-    }
+    .brand-mini img { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; background: var(--soft); }
     .brand-mini h1 { font-size: 15px; margin: 0; color: var(--text); line-height: 1.2; }
     .brand-mini span { font-size: 11px; color: var(--muted); }
 
     .nav-btn {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
-      padding: 11px 14px;
-      margin-bottom: 6px;
-      border: none;
-      background: transparent;
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      text-align: left;
-      transition: 0.15s;
+      display: flex; align-items: center; gap: 10px; width: 100%;
+      padding: 11px 14px; margin-bottom: 6px; border: none; background: transparent;
+      color: var(--muted); font-size: 14px; font-weight: 600; border-radius: 10px;
+      cursor: pointer; text-align: left; transition: 0.15s;
     }
     .nav-btn:hover { background: var(--soft); color: var(--text); }
     .nav-btn.active { background: var(--primary); color: #fff; }
@@ -108,34 +87,23 @@
       width: 100%;
     }
 
-    /* Mobile Header & Bottom Nav */
     .mobile-header {
-      display: none;
-      position: sticky;
-      top: 0;
-      z-index: 25;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
+      display: none; position: sticky; top: 0; z-index: 25;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
       padding: calc(10px + var(--safe-top)) 16px 10px;
-      align-items: center;
-      justify-content: space-between;
+      align-items: center; justify-content: space-between;
     }
     .mobile-nav {
-      display: none;
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: #fff;
-      border-top: 1px solid var(--border);
-      padding: 6px 4px calc(8px + var(--safe-bottom));
-      z-index: 40;
+      display: none; position: fixed; bottom: 0; left: 0; right: 0;
+      background: #fff; border-top: 1px solid var(--border);
+      padding: 6px 4px calc(8px + var(--safe-bottom)); z-index: 40;
       justify-content: space-around;
     }
     .mobile-nav button {
       background: none; border: none; color: var(--muted);
       display: flex; flex-direction: column; align-items: center; gap: 2px;
-      font-size: 10px; font-weight: 600; padding: 4px 6px; cursor: pointer;
-      border-radius: 8px;
+      font-size: 10px; font-weight: 600; padding: 4px 6px; cursor: pointer; border-radius: 8px;
     }
     .mobile-nav button .ico { font-size: 18px; line-height: 1.1; }
     .mobile-nav button.active { color: var(--primary); }
@@ -147,17 +115,12 @@
       .main-area { padding: 16px 14px calc(92px + var(--safe-bottom)); }
     }
 
-    /* Cards & Typography */
     .page-title { font-size: 22px; margin: 0 0 4px; }
     .page-sub { font-size: 13.5px; color: var(--muted); margin: 0 0 18px; }
 
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow);
-      margin-bottom: 16px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); margin-bottom: 16px;
     }
     .card h3 { margin: 0 0 10px; font-size: 16px; }
 
@@ -169,21 +132,28 @@
       .grid-4.stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    .stat-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px;
+    /* Preview Katalog Layouts */
+    .cat-layout-large { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .cat-layout-grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .cat-layout-list { display: flex; flex-direction: column; gap: 10px; }
+    .prod-list-row {
+      display: flex; gap: 10px; background: #fff; border: 1px solid var(--border);
+      border-radius: 12px; padding: 10px; align-items: center;
     }
+    .prod-list-row img { width: 76px; height: 76px; border-radius: 10px; object-fit: cover; flex-shrink: 0; }
+    .cat-section-title {
+      font-size: 15px; font-weight: 800; color: var(--primary);
+      margin: 18px 0 10px; padding-bottom: 4px; border-bottom: 2px solid var(--soft);
+    }
+
+    .stat-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
     .stat-box .lbl { font-size: 12px; color: var(--muted); }
     .stat-box .val { font-size: 22px; font-weight: 800; color: var(--primary); margin-top: 2px; }
 
-    /* Buttons & Inputs */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 6px;
       padding: 10px 15px; border-radius: 10px; border: 1px solid transparent;
-      font-size: 13.5px; font-weight: 600; cursor: pointer; transition: 0.15s;
-      text-decoration: none;
+      font-size: 13.5px; font-weight: 600; cursor: pointer; transition: 0.15s; text-decoration: none;
     }
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-primary:hover { background: var(--primary-dark); }
@@ -214,35 +184,24 @@
     }
     .badge-green { background: #e6f6ec; color: #1c6b3d; }
 
-    /* Install Banner */
     .install-banner {
-      background: linear-gradient(135deg, #c26d3a, #8e4620);
-      color: #fff;
-      border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
+      background: linear-gradient(135deg, #c26d3a, #8e4620); color: #fff;
+      border-radius: var(--radius); padding: 16px; margin-bottom: 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
     }
     .install-banner h4 { margin: 0 0 3px; font-size: 15px; }
     .install-banner p { margin: 0; font-size: 12.5px; opacity: 0.92; }
 
-    /* Product Cards */
     .prod-card {
       background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
       overflow: hidden; display: flex; flex-direction: column;
     }
-    .prod-img-wrap {
-      width: 100%; aspect-ratio: 1/1; background: var(--soft); position: relative; overflow: hidden;
-    }
+    .prod-img-wrap { width: 100%; aspect-ratio: 1/1; background: var(--soft); position: relative; overflow: hidden; }
     .prod-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .prod-body { padding: 12px; flex: 1; display: flex; flex-direction: column; }
-    .prod-title { font-weight: 700; font-size: 14.5px; margin: 4px 0; }
-    .prod-price { font-weight: 800; color: var(--primary); font-size: 15px; margin-bottom: 6px; }
-    .prod-desc { font-size: 12.5px; color: var(--muted); margin: 0 0 10px; flex: 1; }
+    .prod-body { padding: 10px; flex: 1; display: flex; flex-direction: column; }
+    .prod-title { font-weight: 700; font-size: 14px; margin: 3px 0; }
+    .prod-price { font-weight: 800; color: var(--primary); font-size: 14.5px; margin-bottom: 5px; }
+    .prod-desc { font-size: 12px; color: var(--muted); margin: 0 0 8px; flex: 1; }
 
     .chip-bar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 12px; }
     .chip {
@@ -251,19 +210,13 @@
     }
     .chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    /* Modals */
     .modal-backdrop {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(30, 18, 10, 0.55);
-      z-index: 100;
-      align-items: center; justify-content: center;
-      padding: 16px;
-      overflow-y: auto;
+      display: none; position: fixed; inset: 0; background: rgba(30, 18, 10, 0.55);
+      z-index: 100; align-items: center; justify-content: center; padding: 16px; overflow-y: auto;
     }
     .modal-backdrop.open { display: flex; }
     .modal-box {
-      background: #fff; border-radius: 16px; width: 100%; max-width: 560px;
+      background: #fff; border-radius: 16px; width: 100%; max-width: 580px;
       max-height: 90vh; overflow-y: auto; padding: 20px; position: relative;
       box-shadow: 0 20px 50px rgba(0,0,0,0.25);
     }
@@ -278,23 +231,12 @@
       border-radius: 50%; font-size: 18px; cursor: pointer; color: var(--text);
     }
 
-    /* Checklist */
     .check-item {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px;
-      background: #fff;
+      padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; background: #fff;
     }
     .check-item.done { background: #f3fbf6; border-color: #c7e8d4; }
 
-    /* Cart floating bar */
-    .cart-bar {
-      position: sticky; bottom: 12px; background: var(--primary); color: #fff;
-      border-radius: 14px; padding: 12px 16px; display: flex; align-items: center;
-      justify-content: space-between; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      margin-top: 16px;
-    }
-
-    /* Toast */
     #toast {
       position: fixed; bottom: calc(80px + var(--safe-bottom)); left: 50%;
       transform: translateX(-50%); background: #2d2018; color: #fff;
@@ -313,21 +255,13 @@
       #print-area { display: block !important; }
       @page { size: A4; margin: 14mm; }
       .pdf-page {
-        page-break-after: always;
-        min-height: 265mm;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        page-break-after: always; min-height: 265mm;
+        display: flex; flex-direction: column; justify-content: space-between;
       }
       .pdf-page:last-child { page-break-after: auto; }
       .pdf-cover {
-        text-align: center;
-        justify-content: center !important;
-        align-items: center;
-        border: 2px solid var(--primary);
-        border-radius: 16px;
-        padding: 36px;
-        background: #faf6f0;
+        text-align: center; justify-content: center !important; align-items: center;
+        border: 2px solid var(--primary); border-radius: 16px; padding: 36px; background: #faf6f0;
       }
       .pdf-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
       .pdf-grid-6 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -402,13 +336,13 @@
         </div>
 
         <h2 class="page-title">Selamat Datang di Studio Bakery 👋</h2>
-        <p class="page-sub">Kelola foto produk, katalog online keranjang WhatsApp, dan proposal bisnis dalam satu aplikasi.</p>
+        <p class="page-sub">Kelola foto produk, katalog online terpisah dengan keranjang &amp; ongkir WhatsApp, serta proposal bisnis dalam satu aplikasi.</p>
 
         <div class="grid-4 stats-grid" style="margin-bottom:16px;">
           <div class="stat-box"><div class="lbl">Total Produk</div><div class="val" id="statProd">0</div></div>
           <div class="stat-box"><div class="lbl">Katalog Aktif</div><div class="val" id="statCat">0</div></div>
           <div class="stat-box"><div class="lbl">Proposal Bisnis</div><div class="val" id="statProp">0</div></div>
-          <div class="stat-box"><div class="lbl">Status Cloud</div><div class="val" id="statCloud" style="font-size:15px;padding-top:6px;">Lokal</div></div>
+          <div class="stat-box"><div class="lbl">Kuota AI Bonus</div><div class="val" id="statAi" style="font-size:15px;padding-top:6px;">Belum Aktif</div></div>
         </div>
 
         <div class="card">
@@ -423,8 +357,8 @@
             <button class="btn btn-primary btn-sm" onclick="switchTab('products'); openProductModal();">Tambah Produk</button>
           </div>
           <div class="card">
-            <h3>📖 Buat Katalog &amp; PDF</h3>
-            <p style="font-size:13px;color:var(--muted);">Buat katalog online dengan keranjang WhatsApp opsional dan cetak PDF A4.</p>
+            <h3>📖 Buat Katalog &amp; Link Toko</h3>
+            <p style="font-size:13px;color:var(--muted);">Publikasikan katalog online terpisah dengan link nama tokomu, ongkir Motor/Mobil &amp; PDF A4.</p>
             <button class="btn btn-primary btn-sm" onclick="switchTab('catalogs'); openCatalogModal();">Buat Katalog</button>
           </div>
           <div class="card">
@@ -438,7 +372,7 @@
       <!-- TAB: PROFIL BRAND -->
       <section id="tab-brand" class="hidden">
         <h2 class="page-title">Profil Brand &amp; Identitas Toko</h2>
-        <p class="page-sub">Data ini otomatis tampil di cover katalog, watermark foto, link online, dan kop proposal.</p>
+        <p class="page-sub">Data ini otomatis tampil di cover katalog, watermark foto, link katalog online, dan kop proposal.</p>
 
         <div class="card">
           <div class="grid-2">
@@ -501,7 +435,7 @@
         <div class="row between" style="margin-bottom:10px;">
           <div>
             <h2 class="page-title" style="margin-bottom:2px;">Bank Produk</h2>
-            <p class="page-sub" style="margin-bottom:0;">Upload foto manual (auto WebP) atau lengkapi deskripsi dengan AI.</p>
+            <p class="page-sub" style="margin-bottom:0;">Upload foto manual (auto WebP), atur kategori, atau lengkapi deskripsi dengan AI.</p>
           </div>
           <div class="row">
             <button class="btn btn-outline btn-sm" onclick="openCatManager()">🏷️ Kelola Kategori</button>
@@ -522,7 +456,7 @@
         <div class="row between" style="margin-bottom:14px;">
           <div>
             <h2 class="page-title" style="margin-bottom:2px;">Multi-Katalog Online &amp; PDF</h2>
-            <p class="page-sub" style="margin-bottom:0;">Buat banyak katalog terpisah (Harian, Hampers, Snack Box) lengkap dengan keranjang WA opsional.</p>
+            <p class="page-sub" style="margin-bottom:0;">Publikasikan katalog dengan link singkat nama tokomu, atur tampilan menu &amp; tarif ongkir per km.</p>
           </div>
           <button class="btn btn-primary btn-sm" onclick="openCatalogModal()">+ Buat Katalog Baru</button>
         </div>
@@ -534,7 +468,7 @@
         <div class="row between" style="margin-bottom:14px;">
           <div>
             <h2 class="page-title" style="margin-bottom:2px;">Pembuat Proposal Bisnis</h2>
-            <p class="page-sub" style="margin-bottom:0;">Susun proposal penawaran B2B (kantor, kafe, event) dalam bentuk PDF A4 atau link online.</p>
+            <p class="page-sub" style="margin-bottom:0;">Susun proposal penawaran B2B (kantor, kafe, event) dalam bentuk PDF A4.</p>
           </div>
           <button class="btn btn-primary btn-sm" onclick="openProposalModal()">+ Buat Proposal Baru</button>
         </div>
@@ -543,48 +477,70 @@
 
       <!-- TAB: CLOUD & AI -->
       <section id="tab-settings" class="hidden">
-        <h2 class="page-title">Cloud (Supabase) &amp; Kunci AI</h2>
-        <p class="page-sub">Aplikasi tetap bisa dipakai 100% offline/manual. Hubungkan Cloud untuk link online dan AI untuk teks otomatis.</p>
+        <h2 class="page-title">Asisten AI &amp; Cloud</h2>
+        <p class="page-sub">Aktifkan kuota AI bonus langsung 1-klik di perangkat ini, atau gunakan Gemini API Key milikmu sendiri.</p>
 
         <div class="grid-2">
-          <!-- Supabase Cloud -->
+          <!-- AI AUTO-KLAIM & BYOK -->
           <div class="card">
-            <h3>☁️ Koneksi Supabase (Server Pribadi)</h3>
-            <div class="form-group">
-              <label>URL Cloudflare Worker (Untuk Login 1-Klik &amp; Auto-Ping)</label>
-              <input type="url" id="workerUrlInput" placeholder="https://bakery-unified-worker.namakamu.workers.dev" />
-            </div>
-            <button class="btn btn-primary btn-block" style="margin-bottom:12px;" onclick="loginSupabaseOAuth()">⚡ Hubungkan Supabase Otomatis (1-Klik)</button>
+            <h3>✨ Pengaturan Asisten AI (Gemini)</h3>
 
-            <hr style="border:none;border-top:1px solid var(--border);margin:14px 0;" />
-            <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Atau masukkan kredensial Supabase secara manual:</div>
-            <div class="form-group">
-              <label>Supabase Project URL</label>
-              <input type="url" id="sbUrlInput" placeholder="https://xxxx.supabase.co" />
+            <div style="padding:14px;background:var(--soft);border-radius:12px;margin-bottom:14px;">
+              <div style="font-weight:700;font-size:14px;margin-bottom:4px;">🎁 Kuota AI Bonus (100x Klik)</div>
+              <p style="font-size:12.5px;color:var(--muted);margin:0 0 10px;">
+                Otomatis terhubung ke server AI tanpa perlu setting. Berlaku 1x aktivasi per perangkat.
+              </p>
+
+              <button id="btnKlaimAI" class="btn btn-primary btn-block" onclick="klaimKuotaAI()">
+                ⚡ Aktifkan Kuota AI Bonus (100 Kredit)
+              </button>
+
+              <div id="infoLisensiAktif" style="display:none;margin-top:8px;padding:10px 12px;background:#f3fbf6;border:1px solid #b7e4c7;border-radius:10px;">
+                <div style="font-size:12px;color:#1c6b3d;font-weight:700;">Status: Aktif ✅</div>
+                <div style="font-size:13.5px;margin:3px 0;">Kode Perangkat: <strong id="tampilKodeLisensi">-</strong></div>
+                <div style="font-size:13.5px;">Sisa Kuota AI: <strong id="tampilSisaKredit" style="color:var(--primary);">-</strong> klik</div>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Supabase Anon Key</label>
-              <input type="password" id="sbKeyInput" placeholder="eyJhbGciOi..." />
-            </div>
-            <div class="row">
-              <button class="btn btn-outline btn-sm" onclick="saveSupabaseManual()">Simpan &amp; Aktifkan Auto-Ping</button>
-              <button class="btn btn-soft btn-sm" onclick="copySqlSetup()">📋 Salin Script SQL</button>
+
+            <div style="padding:14px;background:#f8f9fa;border:1px solid #e6e6e6;border-radius:12px;">
+              <div style="font-weight:700;font-size:13.5px;margin-bottom:4px;">🔑 Atau Pakai Gemini API Key Sendiri (Opsional)</div>
+              <p style="font-size:12px;color:var(--muted);margin:0 0 8px;">
+                Jika kuota bonus habis, masukkan API Key gratis dari Google AI Studio. Jika diisi, aplikasi otomatis memakai API Key pribadimu.
+              </p>
+              <div class="form-group" style="margin-bottom:8px;">
+                <input type="password" id="geminiKeyInput" placeholder="AIzaSy..." />
+              </div>
+              <div class="row">
+                <button class="btn btn-primary btn-sm" style="flex:1;" onclick="saveCustomGeminiKey()">💾 Simpan API Key</button>
+                <button class="btn btn-danger btn-sm" onclick="clearCustomGeminiKey()">Hapus</button>
+              </div>
+              <div id="byokStatusText" style="font-size:11.5px;color:var(--success);margin-top:6px;"></div>
             </div>
           </div>
 
-          <!-- AI & Backup -->
+          <!-- SUPABASE & BACKUP -->
           <div>
             <div class="card">
-              <h3>✨ Pengaturan AI (Opsional)</h3>
+              <h3>☁️ Koneksi Supabase (Opsional)</h3>
+              <p style="font-size:12.5px;color:var(--muted);margin-top:0;">
+                Hubungkan database Supabase pribadimu untuk sinkronisasi cloud &amp; anti-pause otomatis.
+              </p>
+              <button class="btn btn-primary btn-block" style="margin-bottom:12px;" onclick="loginSupabaseOAuth()">⚡ Hubungkan Supabase Otomatis (1-Klik)</button>
+
+              <hr style="border:none;border-top:1px solid var(--border);margin:12px 0;" />
+              <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Atau masukkan kredensial Supabase secara manual:</div>
               <div class="form-group">
-                <label>Kode Lisensi Paket (Kredit AI Bawaan)</label>
-                <input type="text" id="licenseKeyInput" placeholder="Contoh: BAKERY-XXXX-XXXX" />
+                <label>Supabase Project URL</label>
+                <input type="url" id="sbUrlInput" placeholder="https://xxxx.supabase.co" />
               </div>
               <div class="form-group">
-                <label>Atau Kunci API Gemini Sendiri (Gratis dari Google AI Studio)</label>
-                <input type="password" id="geminiKeyInput" placeholder="AIzaSy..." />
+                <label>Supabase Anon Key</label>
+                <input type="password" id="sbKeyInput" placeholder="eyJhbGciOi..." />
               </div>
-              <button class="btn btn-primary btn-sm" onclick="saveAiSettings()">Simpan Pengaturan AI</button>
+              <div class="row">
+                <button class="btn btn-outline btn-sm" onclick="saveSupabaseManual()">Simpan &amp; Auto-Ping</button>
+                <button class="btn btn-soft btn-sm" onclick="copySqlSetup()">📋 Salin Script SQL</button>
+              </div>
             </div>
 
             <div class="card">
@@ -702,21 +658,31 @@
         <button class="close-x" onclick="closeModal('modalCatalog')">&times;</button>
       </div>
       <input type="hidden" id="editCatId" />
+
       <div class="form-group">
         <label>Judul Katalog</label>
-        <input type="text" id="catTitle" placeholder="Contoh: Katalog Hampers Lebaran 2026" />
+        <input type="text" id="catTitle" placeholder="Contoh: Katalog Menu Harian &amp; Hampers" />
       </div>
       <div class="form-group">
         <label>Subjudul / Keterangan Cover</label>
         <input type="text" id="catSubtitle" placeholder="Pilihan kue premium untuk keluarga &amp; relasi" />
       </div>
+
+      <div class="form-group" style="background:#f3fbf6;border:1px solid #c7e8d4;padding:12px;border-radius:10px;">
+        <label>🔗 Alamat Link Singkat Katalog Online (Nama Toko)</label>
+        <input type="text" id="catSlug" placeholder="contoh: dapur-mama-rina" oninput="updateSlugPreview()" />
+        <div style="font-size:11.5px;color:#1c6b3d;margin-top:5px;">
+          Preview Link: <strong id="slugPreviewText">https://katalog.amndigitalsolution.my.id/nama-toko</strong>
+        </div>
+      </div>
+
       <div class="grid-2">
         <div class="form-group">
-          <label>Tema Visual</label>
-          <select id="catTheme">
-            <option value="warm">Warm Artisan</option>
-            <option value="pastel">Pastel Sweet</option>
-            <option value="minimal">Minimalist Modern</option>
+          <label>Tampilan Menu Katalog Online</label>
+          <select id="catLayout">
+            <option value="grid2">2 Menu per Baris (Grid Rapi — Hemat Scroll)</option>
+            <option value="list">Baris Kompak (List — Terbaik untuk Banyak Menu)</option>
+            <option value="large">1 Menu Besar per Baris (Foto Besar)</option>
           </select>
         </div>
         <div class="form-group">
@@ -730,26 +696,52 @@
 
       <div class="form-group" style="background:var(--soft);padding:12px;border-radius:10px;">
         <label style="display:flex;align-items:center;gap:8px;margin:0;cursor:pointer;">
-          <input type="checkbox" id="catEnableCart" checked />
-          <span>Aktifkan Fitur Keranjang Belanja di Link Katalog Online</span>
+          <input type="checkbox" id="catEnableCart" checked onchange="toggleShippingBox()" />
+          <span>Aktifkan Keranjang Belanja di Link Katalog Online</span>
         </label>
-        <div style="font-size:11.5px;color:var(--muted);margin-top:4px;">Jika aktif, pembeli bisa pilih beberapa kue sekaligus lalu kirim rincian &amp; total harga otomatis ke WhatsApp admin.</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:4px;">Pembeli bisa memilih banyak menu lintas kategori ke dalam 1 keranjang lalu kirim rincian &amp; total ke WhatsApp.</div>
+      </div>
+
+      <!-- PENGATURAN ONGKIR -->
+      <div id="shippingSettingsBox" style="background:#faf8f5;border:1px solid var(--border);padding:12px;border-radius:10px;margin-bottom:13px;">
+        <label style="display:flex;align-items:center;gap:8px;margin:0 0 8px;cursor:pointer;">
+          <input type="checkbox" id="catEnableShipping" checked />
+          <span>🚚 Aktifkan Hitung Ongkir di Keranjang (Motor &amp; Mobil per Km)</span>
+        </label>
+        <div class="grid-2">
+          <div class="form-group" style="margin-bottom:8px;">
+            <label style="font-size:11.5px;">🏍️ Tarif Motor / Km (Rp)</label>
+            <input type="number" id="shipMotorPerKm" value="3000" />
+          </div>
+          <div class="form-group" style="margin-bottom:8px;">
+            <label style="font-size:11.5px;">🏍️ Min. Ongkir Motor (Rp)</label>
+            <input type="number" id="shipMotorMin" value="10000" />
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-size:11.5px;">🚗 Tarif Mobil / Km (Rp)</label>
+            <input type="number" id="shipMobilPerKm" value="7000" />
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-size:11.5px;">🚗 Min. Ongkir Mobil (Rp)</label>
+            <input type="number" id="shipMobilMin" value="25000" />
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
         <label>Pilih Produk yang Masuk Katalog Ini</label>
-        <div id="catProdPicker" style="max-height:200px;overflow-y:auto;border:1px solid var(--border);border-radius:10px;padding:8px;"></div>
+        <div id="catProdPicker" style="max-height:190px;overflow-y:auto;border:1px solid var(--border);border-radius:10px;padding:8px;"></div>
       </div>
 
       <button class="btn btn-primary btn-block" onclick="saveCatalog()">💾 Simpan Katalog</button>
     </div>
   </div>
 
-  <!-- MODAL: PREVIEW KATALOG ONLINE + KERANJANG WA -->
+  <!-- MODAL: PREVIEW KATALOG ONLINE + KERANJANG & ONGKIR -->
   <div class="modal-backdrop" id="modalCatalogPreview">
     <div class="modal-box wide">
       <div class="modal-head">
-        <h3 id="previewCatHead">Tampilan Katalog Online</h3>
+        <h3 id="previewCatHead">Preview Katalog Online</h3>
         <button class="close-x" onclick="closeModal('modalCatalogPreview')">&times;</button>
       </div>
       <div id="previewCatContent"></div>
@@ -830,9 +822,19 @@
 
   <script>
     // =========================================================================
-    // STATE & DEFAULT DATA
+    // KONFIGURASI SERVER PERMANEN (OTOMATIS TERHUBUNG)
     // =========================================================================
-    const STORAGE_KEY = 'bakery_studio_pwa_state_v1';
+    const DEFAULT_WORKER_URL = 'https://apibakestudio.amndigitalsolution.my.id';
+    const CATALOG_BASE_URL   = 'https://katalog.amndigitalsolution.my.id';
+    const STORAGE_KEY        = 'bakery_studio_pwa_state_v1';
+
+    const DEFAULT_SHIPPING = {
+      enabled: true,
+      motorPerKm: 3000,
+      motorMin: 10000,
+      mobilPerKm: 7000,
+      mobilMin: 25000
+    };
 
     const DEFAULT_STATE = {
       brand: {
@@ -870,8 +872,16 @@
       ],
       catalogs: [
         {
-          id: 'c1', title: 'Katalog Menu Unggulan', subtitle: 'Pilihan cake, pastry, dan hampers terbaik kami',
-          theme: 'warm', perPage: 4, enableCart: true, productIds: ['p1', 'p2', 'p3', 'p4']
+          id: 'c1',
+          title: 'Katalog Menu Unggulan',
+          subtitle: 'Pilihan cake, pastry, dan hampers terbaik kami',
+          slug: '',
+          layout: 'grid2',
+          perPage: 4,
+          enableCart: true,
+          shipping: { ...DEFAULT_SHIPPING },
+          publishedUrl: '',
+          productIds: ['p1', 'p2', 'p3', 'p4']
         }
       ],
       proposals: [
@@ -886,16 +896,20 @@
         }
       ],
       settings: {
-        workerUrl: '',
+        workerUrl: DEFAULT_WORKER_URL,
         sbUrl: '',
         sbKey: '',
         licenseKey: '',
+        licenseCredits: null,
         geminiKey: ''
       }
     };
 
     let state = loadState();
     let activeCatFilter = 'Semua';
+    let previewCatFilter = 'Semua';
+    let previewShipMethod = 'pickup';
+    let previewShipKm = 0;
     let rawUploadImg = null;
     let processedImgData = null;
     let activeCart = {};
@@ -903,16 +917,49 @@
     let tempPropSections = [];
     let deferredPrompt = null;
 
+    function getDeviceId() {
+      let id = localStorage.getItem('bakery_device_id');
+      if (!id) {
+        id = 'DEV-' + Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 10);
+        localStorage.setItem('bakery_device_id', id);
+      }
+      return id;
+    }
+
+    function slugify(str) {
+      return String(str || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .substring(0, 48);
+    }
+
     function loadState() {
       try {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (!saved) return JSON.parse(JSON.stringify(DEFAULT_STATE));
         const parsed = JSON.parse(saved);
+        const mergedCatalogs = (parsed.catalogs || DEFAULT_STATE.catalogs).map(c => ({
+          slug: '',
+          layout: 'grid2',
+          perPage: 4,
+          enableCart: true,
+          publishedUrl: '',
+          ...c,
+          shipping: { ...DEFAULT_SHIPPING, ...(c.shipping || {}) }
+        }));
         return {
           ...DEFAULT_STATE,
           ...parsed,
           brand: { ...DEFAULT_STATE.brand, ...(parsed.brand || {}) },
-          settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) }
+          catalogs: mergedCatalogs,
+          settings: {
+            ...DEFAULT_STATE.settings,
+            ...(parsed.settings || {}),
+            workerUrl: DEFAULT_WORKER_URL
+          }
         };
       } catch {
         return JSON.parse(JSON.stringify(DEFAULT_STATE));
@@ -938,7 +985,7 @@
       el.textContent = msg;
       el.style.display = 'block';
       clearTimeout(window._t);
-      window._t = setTimeout(() => { el.style.display = 'none'; }, 2800);
+      window._t = setTimeout(() => { el.style.display = 'none'; }, 3000);
     }
 
     function formatRp(n) {
@@ -1009,13 +1056,21 @@
       document.getElementById('statProd').textContent = state.products.length;
       document.getElementById('statCat').textContent = state.catalogs.length;
       document.getElementById('statProp').textContent = state.proposals.length;
-      document.getElementById('statCloud').textContent = state.settings.sbUrl ? 'Terhubung ✅' : 'Mode Lokal';
+
+      if (state.settings.geminiKey) {
+        document.getElementById('statAi').textContent = 'API Pribadi ✅';
+      } else if (state.settings.licenseKey) {
+        const cr = state.settings.licenseCredits;
+        document.getElementById('statAi').textContent = (cr !== null && cr !== undefined) ? `${cr} Klik` : 'Aktif ✅';
+      } else {
+        document.getElementById('statAi').textContent = 'Belum Aktif';
+      }
 
       const steps = [
         { done: state.brand.name !== 'Dapur Manis Artisan', label: '1. Lengkapi Profil Brand & Nomor WhatsApp Toko', tab: 'brand' },
         { done: state.products.length >= 1, label: '2. Upload Foto Produk Manual (Auto WebP)', tab: 'products' },
-        { done: state.catalogs.length >= 1, label: '3. Buat Katalog Online / Cetak PDF Multi-Halaman', tab: 'catalogs' },
-        { done: !!state.settings.sbUrl, label: '4. Hubungkan Supabase (Opsional untuk Link Publik)', tab: 'settings' }
+        { done: state.catalogs.some(c => !!c.publishedUrl), label: '3. Publikasikan Link Katalog Online Nama Tokomu', tab: 'catalogs' },
+        { done: !!(state.settings.licenseKey || state.settings.geminiKey), label: '4. Aktifkan Kuota AI Bonus 100 Kredit (1-Klik)', tab: 'settings' }
       ];
       document.getElementById('onboardingList').innerHTML = steps.map(s => `
         <div class="check-item ${s.done ? 'done' : ''}">
@@ -1039,9 +1094,7 @@
       document.getElementById('brandPo').value = state.brand.poNotes || '';
     }
 
-    function setBrandColor(hex) {
-      document.getElementById('brandColor').value = hex;
-    }
+    function setBrandColor(hex) { document.getElementById('brandColor').value = hex; }
 
     function handleLogoUpload(ev) {
       const file = ev.target.files[0];
@@ -1317,8 +1370,14 @@
     }
 
     // =========================================================================
-    // MULTI-KATALOG & KERANJANG WHATSAPP OPSIONAL
+    // MULTI-KATALOG, PUBLIKASI LINK TERPISAH, LAYOUT & ONGKIR
     // =========================================================================
+    function layoutLabel(l) {
+      if (l === 'large') return '1 Kolom Besar';
+      if (l === 'list') return 'Baris Ringkas';
+      return '2 Kolom Grid';
+    }
+
     function renderCatalogs() {
       const el = document.getElementById('catalogList');
       if (!state.catalogs.length) {
@@ -1329,13 +1388,22 @@
         <div class="card">
           <div class="row between" style="margin-bottom:6px;">
             <h3 style="margin:0;">${esc(c.title)}</h3>
-            <span class="badge ${c.enableCart ? 'badge-green' : ''}">${c.enableCart ? '🛒 Keranjang WA Aktif' : '💬 WA Langsung'}</span>
+            <span class="badge ${c.enableCart ? 'badge-green' : ''}">${c.enableCart ? '🛒 Keranjang WA' : '💬 WA Langsung'}</span>
           </div>
-          <p style="font-size:13px;color:var(--muted);margin:0 0 10px;">${esc(c.subtitle || '-')} • <strong>${c.productIds.length} produk</strong> • ${c.perPage} produk/hal PDF</p>
+          <p style="font-size:12.5px;color:var(--muted);margin:0 0 8px;">
+            ${esc(c.subtitle || '-')} • <strong>${c.productIds.length} produk</strong> • ${layoutLabel(c.layout)} ${c.shipping?.enabled ? '• 🚚 Ongkir Aktif' : ''}
+          </p>
+          ${c.publishedUrl ? `
+            <div style="background:#f3fbf6;border:1px solid #c7e8d4;padding:8px 10px;border-radius:8px;margin-bottom:10px;font-size:12px;">
+              <div style="color:#1c6b3d;font-weight:700;">Link Katalog Online Aktif:</div>
+              <a href="${esc(c.publishedUrl)}" target="_blank" style="color:var(--primary);word-break:break-all;font-weight:600;">${esc(c.publishedUrl)}</a>
+            </div>
+          ` : ''}
           <div class="row">
-            <button class="btn btn-primary btn-sm" onclick="openCatalogPreview('${c.id}')">👁️ Buka Katalog</button>
-            <button class="btn btn-soft btn-sm" onclick="printCatalogPDF('${c.id}')">📄 Cetak PDF A4</button>
-            <button class="btn btn-outline btn-sm" onclick="copyCatalogLink('${c.id}')">🔗 Salin Link</button>
+            <button class="btn btn-success btn-sm" onclick="publishCatalogOnline('${c.id}')">🚀 ${c.publishedUrl ? 'Update Link' : 'Publikasikan Link'}</button>
+            ${c.publishedUrl ? `<button class="btn btn-outline btn-sm" onclick="copyPublishedUrl('${c.id}')">🔗 Salin Link</button>` : ''}
+            <button class="btn btn-primary btn-sm" onclick="openCatalogPreview('${c.id}')">👁️ Preview</button>
+            <button class="btn btn-soft btn-sm" onclick="printCatalogPDF('${c.id}')">📄 PDF A4</button>
             <button class="btn btn-outline btn-sm" onclick="openCatalogModal('${c.id}')">✏️</button>
             <button class="btn btn-danger btn-sm" onclick="deleteCatalog('${c.id}')">🗑️</button>
           </div>
@@ -1343,22 +1411,44 @@
       `).join('');
     }
 
+    function updateSlugPreview() {
+      const val = slugify(document.getElementById('catSlug').value) || 'nama-toko';
+      document.getElementById('slugPreviewText').textContent = `${CATALOG_BASE_URL}/${val}`;
+    }
+
+    function toggleShippingBox() {
+      const checked = document.getElementById('catEnableCart').checked;
+      document.getElementById('shippingSettingsBox').style.display = checked ? 'block' : 'none';
+    }
+
     function openCatalogModal(id = null) {
       const picker = document.getElementById('catProdPicker');
       const existing = id ? state.catalogs.find(x => x.id === id) : null;
+      const ship = { ...DEFAULT_SHIPPING, ...(existing?.shipping || {}) };
+
       document.getElementById('catModalTitle').textContent = existing ? 'Edit Katalog' : 'Buat Katalog Baru';
       document.getElementById('editCatId').value = existing ? existing.id : '';
       document.getElementById('catTitle').value = existing ? existing.title : '';
       document.getElementById('catSubtitle').value = existing ? existing.subtitle : '';
-      document.getElementById('catTheme').value = existing ? existing.theme : 'warm';
+      document.getElementById('catSlug').value = existing?.slug || slugify(state.brand.name);
+      document.getElementById('catLayout').value = existing?.layout || 'grid2';
       document.getElementById('catPerPage').value = existing ? existing.perPage : 4;
       document.getElementById('catEnableCart').checked = existing ? !!existing.enableCart : true;
+
+      document.getElementById('catEnableShipping').checked = !!ship.enabled;
+      document.getElementById('shipMotorPerKm').value = ship.motorPerKm;
+      document.getElementById('shipMotorMin').value = ship.motorMin;
+      document.getElementById('shipMobilPerKm').value = ship.mobilPerKm;
+      document.getElementById('shipMobilMin').value = ship.mobilMin;
+
+      updateSlugPreview();
+      toggleShippingBox();
 
       const selectedIds = existing ? existing.productIds : state.products.map(p => p.id);
       picker.innerHTML = state.products.map(p => `
         <label style="display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid var(--border);margin:0;font-weight:500;">
           <input type="checkbox" class="cat-prod-cb" value="${p.id}" ${selectedIds.includes(p.id) ? 'checked' : ''} />
-          <span>${esc(p.name)} — <strong>${formatRp(p.price)}</strong></span>
+          <span><strong>[${esc(p.category)}]</strong> ${esc(p.name)} — ${formatRp(p.price)}</span>
         </label>
       `).join('') || '<div style="font-size:12px;color:var(--muted);">Belum ada produk di Bank Produk.</div>';
 
@@ -1371,14 +1461,26 @@
       const productIds = Array.from(document.querySelectorAll('.cat-prod-cb:checked')).map(cb => cb.value);
       if (!productIds.length) return toast('Pilih minimal 1 produk.');
 
+      const rawSlug = slugify(document.getElementById('catSlug').value) || slugify(state.brand.name) || ('toko-' + Date.now().toString(36));
       const id = document.getElementById('editCatId').value || ('c' + Date.now());
+      const prev = state.catalogs.find(x => x.id === id);
+
       const obj = {
         id,
         title,
         subtitle: document.getElementById('catSubtitle').value.trim(),
-        theme: document.getElementById('catTheme').value,
+        slug: rawSlug,
+        layout: document.getElementById('catLayout').value || 'grid2',
         perPage: Number(document.getElementById('catPerPage').value) || 4,
         enableCart: document.getElementById('catEnableCart').checked,
+        shipping: {
+          enabled: document.getElementById('catEnableShipping').checked,
+          motorPerKm: Number(document.getElementById('shipMotorPerKm').value) || 0,
+          motorMin: Number(document.getElementById('shipMotorMin').value) || 0,
+          mobilPerKm: Number(document.getElementById('shipMobilPerKm').value) || 0,
+          mobilMin: Number(document.getElementById('shipMobilMin').value) || 0
+        },
+        publishedUrl: prev?.publishedUrl || '',
         productIds
       };
 
@@ -1388,7 +1490,7 @@
 
       saveState();
       closeModal('modalCatalog');
-      toast('Katalog disimpan!');
+      toast('Katalog disimpan! Klik "Publikasikan Link" untuk online.');
     }
 
     function deleteCatalog(id) {
@@ -1398,99 +1500,221 @@
       toast('Katalog dihapus.');
     }
 
-    function copyCatalogLink(id) {
-      const base = window.location.origin + window.location.pathname;
-      const url = `${base}?mode=katalog&id=${encodeURIComponent(id)}`;
-      navigator.clipboard.writeText(url).then(() => toast('Link katalog berhasil disalin!'));
+    async function publishCatalogOnline(id) {
+      const cat = state.catalogs.find(x => x.id === id);
+      if (!cat) return;
+
+      const slug = slugify(cat.slug || state.brand.name);
+      if (!slug || slug.length < 3) {
+        return toast('Edit katalog dan isi nama link singkat minimal 3 huruf.');
+      }
+
+      const items = cat.productIds
+        .map(pid => state.products.find(p => p.id === pid))
+        .filter(Boolean);
+
+      if (!items.length) return toast('Katalog belum memiliki produk.');
+
+      toast('Sedang mempublikasikan katalog online...');
+
+      try {
+        const payload = {
+          brand: state.brand,
+          categories: state.categories,
+          catalog: {
+            title: cat.title,
+            subtitle: cat.subtitle,
+            layout: cat.layout || 'grid2',
+            enableCart: !!cat.enableCart,
+            shipping: { ...DEFAULT_SHIPPING, ...(cat.shipping || {}) }
+          },
+          products: items
+        };
+
+        const res = await fetch(`${DEFAULT_WORKER_URL}/catalog/publish`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            slug,
+            ownerDeviceId: getDeviceId(),
+            payload
+          })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          return toast(data.error || 'Gagal mempublikasikan katalog.');
+        }
+
+        cat.slug = data.slug;
+        cat.publishedUrl = data.url;
+        saveState();
+        navigator.clipboard.writeText(data.url).catch(() => {});
+        toast('Katalog online aktif & link berhasil disalin!');
+      } catch (err) {
+        toast('Gagal terhubung ke server. Periksa koneksi internetmu.');
+      }
     }
 
+    function copyPublishedUrl(id) {
+      const cat = state.catalogs.find(x => x.id === id);
+      if (!cat || !cat.publishedUrl) return;
+      navigator.clipboard.writeText(cat.publishedUrl).then(() => toast('Link katalog disalin!'));
+    }
+
+    // =========================================================================
+    // PREVIEW KATALOG DI DALAM APLIKASI (PER KATEGORI + LAYOUT + ONGKIR)
+    // =========================================================================
     function openCatalogPreview(id) {
       currentPreviewCatId = id;
       activeCart = {};
+      previewCatFilter = 'Semua';
+      previewShipMethod = 'pickup';
+      previewShipKm = 0;
       renderCatalogPreviewBody();
       openModal('modalCatalogPreview');
+    }
+
+    function calcShippingFee(ship, method, km) {
+      if (!ship || !ship.enabled || method === 'pickup') return 0;
+      const dist = Math.max(0, Number(km) || 0);
+      if (dist <= 0) return method === 'motor' ? (ship.motorMin || 0) : (ship.mobilMin || 0);
+      if (method === 'motor') return Math.max(ship.motorMin || 0, Math.ceil(dist * (ship.motorPerKm || 0)));
+      if (method === 'mobil') return Math.max(ship.mobilMin || 0, Math.ceil(dist * (ship.mobilPerKm || 0)));
+      return 0;
     }
 
     function renderCatalogPreviewBody() {
       const cat = state.catalogs.find(x => x.id === currentPreviewCatId);
       if (!cat) return;
-      document.getElementById('previewCatHead').textContent = cat.title;
+      document.getElementById('previewCatHead').textContent = 'Preview: ' + cat.title;
 
-      const items = cat.productIds.map(pid => state.products.find(p => p.id === pid)).filter(Boolean);
+      const allItems = cat.productIds.map(pid => state.products.find(p => p.id === pid)).filter(Boolean);
+      const presentCats = [...new Set(allItems.map(p => p.category))];
       const wa = state.brand.whatsapp || '6281234567890';
+      const layout = cat.layout || 'grid2';
 
       let html = `
-        <div style="text-align:center;padding:18px;background:var(--soft);border-radius:14px;margin-bottom:16px;">
-          <img src="${state.brand.logo}" style="width:64px;height:64px;border-radius:14px;object-fit:cover;margin-bottom:8px;" />
-          <h2 style="margin:0;color:var(--primary);">${esc(state.brand.name)}</h2>
-          <div style="font-size:13px;color:var(--muted);">${esc(cat.subtitle || state.brand.tagline)}</div>
+        <div style="text-align:center;padding:16px;background:var(--soft);border-radius:14px;margin-bottom:14px;">
+          <img src="${state.brand.logo}" style="width:60px;height:60px;border-radius:14px;object-fit:cover;margin-bottom:6px;" />
+          <h2 style="margin:0;color:var(--primary);font-size:20px;">${esc(state.brand.name)}</h2>
+          <div style="font-size:12.5px;color:var(--muted);">${esc(cat.subtitle || state.brand.tagline)}</div>
         </div>
-        <div class="grid-2">
+        <div class="chip-bar">
+          <button class="chip ${previewCatFilter === 'Semua' ? 'active' : ''}" onclick="previewCatFilter='Semua';renderCatalogPreviewBody();">Semua</button>
+          ${presentCats.map(c => `<button class="chip ${previewCatFilter === c ? 'active' : ''}" onclick="previewCatFilter='${esc(c)}';renderCatalogPreviewBody();">${esc(c)}</button>`).join('')}
+        </div>
       `;
 
-      items.forEach(p => {
-        const qty = activeCart[p.id] || 0;
-        const directMsg = encodeURIComponent(`Halo ${state.brand.name}, saya ingin memesan *${p.name}* (${formatRp(p.price)}).`);
-        html += `
-          <div class="prod-card">
-            <div class="prod-img-wrap"><img src="${p.image}" alt="${esc(p.name)}" /></div>
-            <div class="prod-body">
-              <div class="prod-title">${esc(p.name)}</div>
-              <div class="prod-price">${formatRp(p.price)}</div>
-              <p class="prod-desc">${esc(p.desc)}</p>
-              ${cat.enableCart ? `
-                <div class="row between">
-                  ${qty === 0
-                    ? `<button class="btn btn-primary btn-sm btn-block" onclick="updateCart('${p.id}', 1)">+ Tambah ke Keranjang</button>`
-                    : `<div class="row between" style="width:100%;">
-                        <button class="btn btn-outline btn-sm" onclick="updateCart('${p.id}', -1)">−</button>
-                        <strong>${qty} pcs</strong>
-                        <button class="btn btn-primary btn-sm" onclick="updateCart('${p.id}', 1)">+</button>
-                       </div>`
-                  }
+      const catsToShow = previewCatFilter === 'Semua' ? presentCats : [previewCatFilter];
+
+      catsToShow.forEach(catName => {
+        const group = allItems.filter(p => p.category === catName);
+        if (!group.length) return;
+        html += `<div class="cat-section-title">${esc(catName)}</div>`;
+        html += `<div class="cat-layout-${layout}">`;
+
+        group.forEach(p => {
+          const qty = activeCart[p.id] || 0;
+          const directMsg = encodeURIComponent(`Halo ${state.brand.name}, saya ingin memesan *${p.name}* (${formatRp(p.price)}).`);
+          const actionBtn = cat.enableCart
+            ? (qty === 0
+                ? `<button class="btn btn-primary btn-sm btn-block" onclick="updateCart('${p.id}', 1)">+ Keranjang</button>`
+                : `<div class="row between" style="width:100%;"><button class="btn btn-outline btn-sm" onclick="updateCart('${p.id}', -1)">−</button><strong>${qty}</strong><button class="btn btn-primary btn-sm" onclick="updateCart('${p.id}', 1)">+</button></div>`)
+            : `<a class="btn btn-success btn-sm btn-block" target="_blank" href="https://wa.me/${wa}?text=${directMsg}">💬 Pesan WA</a>`;
+
+          if (layout === 'list') {
+            html += `
+              <div class="prod-list-row">
+                <img src="${p.image}" alt="${esc(p.name)}" />
+                <div style="flex:1;min-width:0;">
+                  <div class="prod-title" style="margin:0;">${esc(p.name)}</div>
+                  <div class="prod-price" style="margin:2px 0;">${formatRp(p.price)}</div>
+                  <div style="font-size:11.5px;color:var(--muted);">${esc(p.desc)}</div>
                 </div>
-              ` : `
-                <a class="btn btn-success btn-sm btn-block" target="_blank" href="https://wa.me/${wa}?text=${directMsg}">💬 Pesan via WhatsApp</a>
-              `}
-            </div>
-          </div>
-        `;
+                <div style="width:96px;flex-shrink:0;">${actionBtn}</div>
+              </div>
+            `;
+          } else {
+            html += `
+              <div class="prod-card">
+                <div class="prod-img-wrap"><img src="${p.image}" alt="${esc(p.name)}" /></div>
+                <div class="prod-body">
+                  <div class="prod-title">${esc(p.name)}</div>
+                  <div class="prod-price">${formatRp(p.price)}</div>
+                  <p class="prod-desc">${esc(p.desc)}</p>
+                  ${actionBtn}
+                </div>
+              </div>
+            `;
+          }
+        });
+        html += `</div>`;
       });
 
-      html += `</div>`;
-
-      // Cart Summary & Checkout WA
+      // Keranjang + Rincian + Ongkir
       if (cat.enableCart) {
         const cartEntries = Object.entries(activeCart).filter(([, q]) => q > 0);
         const totalQty = cartEntries.reduce((s, [, q]) => s + q, 0);
-        const totalRp = cartEntries.reduce((s, [pid, q]) => {
+        const subtotalRp = cartEntries.reduce((s, [pid, q]) => {
           const p = state.products.find(x => x.id === pid);
           return s + (p ? p.price * q : 0);
         }, 0);
 
         if (totalQty > 0) {
+          const ship = cat.shipping || DEFAULT_SHIPPING;
+          const ongkir = calcShippingFee(ship, previewShipMethod, previewShipKm);
+          const grandTotal = subtotalRp + ongkir;
+
           html += `
             <div class="card" style="margin-top:16px;border:2px solid var(--primary);">
-              <h3 style="margin-top:0;">🛒 Ringkasan Keranjang (${totalQty} item)</h3>
+              <h3 style="margin-top:0;">🛒 Rincian Keranjang (${totalQty} item)</h3>
+              <div style="margin-bottom:10px;font-size:13px;">
+                ${cartEntries.map(([pid, q]) => {
+                  const p = state.products.find(x => x.id === pid);
+                  if (!p) return '';
+                  return `<div class="row between" style="padding:4px 0;border-bottom:1px dashed var(--border);">
+                    <span>${esc(p.name)} <strong>x${q}</strong></span>
+                    <strong>${formatRp(p.price * q)}</strong>
+                  </div>`;
+                }).join('')}
+              </div>
+
+              ${ship.enabled ? `
+                <div style="background:var(--soft);padding:10px;border-radius:10px;margin-bottom:10px;">
+                  <div class="grid-2">
+                    <div class="form-group" style="margin-bottom:0;">
+                      <label style="font-size:12px;">Metode Pengiriman</label>
+                      <select onchange="previewShipMethod=this.value;renderCatalogPreviewBody();">
+                        <option value="pickup" ${previewShipMethod==='pickup'?'selected':''}>🏪 Ambil Sendiri (Rp 0)</option>
+                        <option value="motor" ${previewShipMethod==='motor'?'selected':''}>🏍️ Antar Motor (${formatRp(ship.motorPerKm)}/km, min ${formatRp(ship.motorMin)})</option>
+                        <option value="mobil" ${previewShipMethod==='mobil'?'selected':''}>🚗 Antar Mobil (${formatRp(ship.mobilPerKm)}/km, min ${formatRp(ship.mobilMin)})</option>
+                      </select>
+                    </div>
+                    ${previewShipMethod !== 'pickup' ? `
+                      <div class="form-group" style="margin-bottom:0;">
+                        <label style="font-size:12px;">Estimasi Jarak (Km)</label>
+                        <input type="number" min="1" step="0.5" value="${previewShipKm || ''}" placeholder="Contoh: 5" oninput="previewShipKm=Number(this.value)||0;renderCatalogPreviewBody();" />
+                      </div>
+                    ` : ''}
+                  </div>
+                </div>
+              ` : ''}
+
               <div class="grid-2">
                 <div class="form-group"><label>Nama Pemesan</label><input type="text" id="cartBuyerName" placeholder="Nama Anda" /></div>
-                <div class="form-group"><label>Catatan / Tanggal Ambil</label><input type="text" id="cartBuyerNote" placeholder="Contoh: Ambil besok jam 10 pagi" /></div>
+                <div class="form-group"><label>Alamat / Catatan Pengambilan</label><input type="text" id="cartBuyerNote" placeholder="Alamat antar atau jam ambil" /></div>
               </div>
+
+              <div style="font-size:13px;color:var(--muted);margin-bottom:4px;">Subtotal Produk: <strong>${formatRp(subtotalRp)}</strong> • Estimasi Ongkir: <strong>${formatRp(ongkir)}</strong></div>
               <div class="row between">
-                <div style="font-size:16px;font-weight:800;color:var(--primary);">Total: ${formatRp(totalRp)}</div>
+                <div style="font-size:17px;font-weight:800;color:var(--primary);">Total: ${formatRp(grandTotal)}</div>
                 <button class="btn btn-success" onclick="checkoutCartWA()">💬 Kirim Pesanan ke WhatsApp</button>
               </div>
             </div>
           `;
         }
       }
-
-      html += `
-        <div style="margin-top:16px;padding:12px;background:#faf6f0;border-radius:10px;font-size:12.5px;color:var(--muted);">
-          <strong>Info Pemesanan:</strong> ${esc(state.brand.poNotes)}<br/>
-          📍 ${esc(state.brand.address)} • 📱 ${esc(state.brand.instagram)}
-        </div>
-      `;
 
       document.getElementById('previewCatContent').innerHTML = html;
     }
@@ -1506,15 +1730,23 @@
       const buyer = (document.getElementById('cartBuyerName')?.value || '').trim() || 'Pelanggan';
       const note = (document.getElementById('cartBuyerNote')?.value || '').trim() || '-';
       let lines = [`Halo *${state.brand.name}*, saya ingin memesan dari *${cat.title}*:`, ''];
-      let total = 0;
+      let subtotal = 0;
       Object.entries(activeCart).forEach(([pid, q], i) => {
         const p = state.products.find(x => x.id === pid);
         if (!p || q <= 0) return;
         const sub = p.price * q;
-        total += sub;
+        subtotal += sub;
         lines.push(`${i + 1}. ${p.name} (${q}x ${formatRp(p.price)}) = *${formatRp(sub)}*`);
       });
-      lines.push('', `*Total Estimasi: ${formatRp(total)}*`, `Nama: ${buyer}`, `Catatan: ${note}`);
+
+      const ship = cat.shipping || DEFAULT_SHIPPING;
+      const ongkir = calcShippingFee(ship, previewShipMethod, previewShipKm);
+      const methodLabel = previewShipMethod === 'motor' ? `Antar Motor (${previewShipKm || 1} km)` : previewShipMethod === 'mobil' ? `Antar Mobil (${previewShipKm || 1} km)` : 'Ambil Sendiri';
+
+      lines.push('', `Subtotal Produk: ${formatRp(subtotal)}`);
+      if (ship.enabled) lines.push(`Pengiriman: ${methodLabel} = ${formatRp(ongkir)}`);
+      lines.push(`*Total Estimasi: ${formatRp(subtotal + ongkir)}*`, `Nama: ${buyer}`, `Catatan/Alamat: ${note}`);
+
       const wa = state.brand.whatsapp || '6281234567890';
       window.open(`https://wa.me/${wa}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
     }
@@ -1777,41 +2009,98 @@
     }
 
     // =========================================================================
-    // CLOUD (SUPABASE OAUTH / MANUAL) & AI CALLER
+    // AI AUTO-KLAIM (100 KREDIT / DEVICE), BYOK & SUPABASE OAUTH
     // =========================================================================
     function renderSettingsForm() {
-      document.getElementById('workerUrlInput').value = state.settings.workerUrl || '';
       document.getElementById('sbUrlInput').value = state.settings.sbUrl || '';
       document.getElementById('sbKeyInput').value = state.settings.sbKey || '';
-      document.getElementById('licenseKeyInput').value = state.settings.licenseKey || '';
       document.getElementById('geminiKeyInput').value = state.settings.geminiKey || '';
+
+      const byokText = document.getElementById('byokStatusText');
+      if (state.settings.geminiKey) {
+        byokText.textContent = '✅ Sedang aktif memakai Gemini API Key pribadimu.';
+      } else {
+        byokText.textContent = '';
+      }
+
+      if (state.settings.licenseKey) {
+        document.getElementById('btnKlaimAI').style.display = 'none';
+        document.getElementById('infoLisensiAktif').style.display = 'block';
+        document.getElementById('tampilKodeLisensi').textContent = state.settings.licenseKey;
+        document.getElementById('tampilSisaKredit').textContent =
+          (state.settings.licenseCredits !== null && state.settings.licenseCredits !== undefined)
+            ? state.settings.licenseCredits : '-';
+      } else {
+        document.getElementById('btnKlaimAI').style.display = 'inline-flex';
+        document.getElementById('infoLisensiAktif').style.display = 'none';
+      }
+    }
+
+    async function klaimKuotaAI() {
+      const btn = document.getElementById('btnKlaimAI');
+      btn.disabled = true;
+      btn.textContent = 'Memproses aktivasi...';
+
+      try {
+        const res = await fetch(`${DEFAULT_WORKER_URL}/ai/claim-license`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ deviceId: getDeviceId() })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          toast(data.error || 'Gagal mengaktifkan kuota AI.');
+          btn.disabled = false;
+          btn.textContent = '⚡ Aktifkan Kuota AI Bonus (100 Kredit)';
+          return;
+        }
+
+        state.settings.workerUrl = DEFAULT_WORKER_URL;
+        state.settings.licenseKey = data.licenseKey;
+        state.settings.licenseCredits = data.credits;
+        saveState();
+        toast(data.message || 'Kuota AI Bonus 100 kredit aktif!');
+      } catch {
+        toast('Gagal terhubung ke server AI. Cek koneksi internet.');
+        btn.disabled = false;
+        btn.textContent = '⚡ Aktifkan Kuota AI Bonus (100 Kredit)';
+      }
+    }
+
+    function saveCustomGeminiKey() {
+      const key = document.getElementById('geminiKeyInput').value.trim();
+      if (!key) return toast('Masukkan Gemini API Key terlebih dahulu.');
+      state.settings.geminiKey = key;
+      saveState();
+      toast('API Key pribadimu tersimpan!');
+    }
+
+    function clearCustomGeminiKey() {
+      state.settings.geminiKey = '';
+      saveState();
+      toast('API Key pribadi dihapus. Kembali memakai Kuota AI Bonus.');
     }
 
     function loginSupabaseOAuth() {
-      const worker = document.getElementById('workerUrlInput').value.trim().replace(/\/$/, '');
-      if (!worker) return toast('Isi URL Cloudflare Worker terlebih dahulu.');
-      state.settings.workerUrl = worker;
-      saveState();
-      window.location.href = `${worker}/auth/supabase`;
+      window.location.href = `${DEFAULT_WORKER_URL}/auth/supabase`;
     }
 
     async function saveSupabaseManual() {
-      const worker = document.getElementById('workerUrlInput').value.trim().replace(/\/$/, '');
       const sbUrl = document.getElementById('sbUrlInput').value.trim().replace(/\/$/, '');
       const sbKey = document.getElementById('sbKeyInput').value.trim();
-      state.settings.workerUrl = worker;
       state.settings.sbUrl = sbUrl;
       state.settings.sbKey = sbKey;
       saveState();
 
-      if (worker && sbUrl && sbKey) {
+      if (sbUrl && sbKey) {
         try {
-          await fetch(`${worker}/register-ping`, {
+          await fetch(`${DEFAULT_WORKER_URL}/register-ping`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ supabaseUrl: sbUrl, anonKey: sbKey })
           });
-          toast('Supabase tersimpan & Auto-Ping 3 hari aktif!');
+          toast('Supabase tersimpan & Auto-Ping aktif!');
         } catch {
           toast('Supabase tersimpan secara lokal.');
         }
@@ -1829,26 +2118,10 @@ INSERT INTO storage.buckets (id, name, public) VALUES ('bakery-assets', 'bakery-
       navigator.clipboard.writeText(sql).then(() => toast('Script SQL Supabase disalin!'));
     }
 
-    function saveAiSettings() {
-      state.settings.workerUrl = document.getElementById('workerUrlInput').value.trim().replace(/\/$/, '');
-      state.settings.licenseKey = document.getElementById('licenseKeyInput').value.trim();
-      state.settings.geminiKey = document.getElementById('geminiKeyInput').value.trim();
-      saveState();
-      toast('Pengaturan AI disimpan!');
-    }
-
     async function callAI(promptText) {
-      const { workerUrl, licenseKey, geminiKey } = state.settings;
-      if (workerUrl && licenseKey) {
-        const res = await fetch(`${workerUrl}/ai/generate`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ licenseKey, prompt: promptText })
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Gagal memanggil AI lisensi.');
-        return data.text;
-      }
+      const { licenseKey, geminiKey } = state.settings;
+
+      // Prioritas 1: API Key Gemini Pribadi (BYOK)
       if (geminiKey) {
         const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`, {
           method: 'POST',
@@ -1856,10 +2129,27 @@ INSERT INTO storage.buckets (id, name, public) VALUES ('bakery-assets', 'bakery-
           body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
         });
         const data = await res.json();
-        if (!res.ok) throw new Error('Kunci AI Gemini tidak valid atau kuota habis.');
+        if (!res.ok) throw new Error('API Key Gemini pribadimu tidak valid atau kuota habis.');
         return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
       }
-      throw new Error('Isi Kode Lisensi atau Kunci AI di menu Cloud & AI terlebih dahulu (atau gunakan Template Instan).');
+
+      // Prioritas 2: Kuota AI Bonus Perangkat (Cloudflare Worker)
+      if (licenseKey) {
+        const res = await fetch(`${DEFAULT_WORKER_URL}/ai/generate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ licenseKey, prompt: promptText })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Gagal memanggil AI.');
+        if (typeof data.remainingCredits !== 'undefined') {
+          state.settings.licenseCredits = data.remainingCredits;
+          saveState();
+        }
+        return data.text;
+      }
+
+      throw new Error('Aktifkan Kuota AI Bonus dulu di menu Cloud & AI (atau masukkan API Key sendiri).');
     }
 
     // =========================================================================
@@ -1892,7 +2182,6 @@ INSERT INTO storage.buckets (id, name, public) VALUES ('bakery-assets', 'bakery-
       reader.readAsText(file);
     }
 
-    // Tangkap hasil OAuth Supabase & Link Katalog Publik
     window.addEventListener('DOMContentLoaded', () => {
       const hash = new URLSearchParams(window.location.hash.substring(1));
       if (hash.get('supabase_connected') === '1') {
@@ -1908,12 +2197,6 @@ INSERT INTO storage.buckets (id, name, public) VALUES ('bakery-assets', 'bakery-
 
       applyTheme();
       renderAll();
-
-      // Jika dibuka lewat link katalog langsung (?mode=katalog&id=...)
-      const qs = new URLSearchParams(window.location.search);
-      if (qs.get('mode') === 'katalog' && qs.get('id')) {
-        openCatalogPreview(qs.get('id'));
-      }
     });
   </script>
 </body>

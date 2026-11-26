@@ -97,15 +97,16 @@
     .mobile-nav {
       display: none; position: fixed; bottom: 0; left: 0; right: 0;
       background: #fff; border-top: 1px solid var(--border);
-      padding: 6px 4px calc(8px + var(--safe-bottom)); z-index: 40;
+      padding: 6px 2px calc(8px + var(--safe-bottom)); z-index: 40;
       justify-content: space-around;
     }
     .mobile-nav button {
       background: none; border: none; color: var(--muted);
       display: flex; flex-direction: column; align-items: center; gap: 2px;
-      font-size: 10px; font-weight: 600; padding: 4px 6px; cursor: pointer; border-radius: 8px;
+      font-size: 9.5px; font-weight: 600; padding: 4px 2px; cursor: pointer;
+      border-radius: 8px; flex: 1; min-width: 0;
     }
-    .mobile-nav button .ico { font-size: 18px; line-height: 1.1; }
+    .mobile-nav button .ico { font-size: 17px; line-height: 1.1; }
     .mobile-nav button.active { color: var(--primary); }
 
     @media (max-width: 860px) {
@@ -144,6 +145,44 @@
     .cat-section-title {
       font-size: 15px; font-weight: 800; color: var(--primary);
       margin: 18px 0 10px; padding-bottom: 4px; border-bottom: 2px solid var(--soft);
+    }
+
+    /* Guide Styles */
+    .guide-chapter {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+    .guide-chapter h3 {
+      margin: 6px 0 6px;
+      font-size: 17px;
+      color: var(--text);
+    }
+    .guide-summary {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+    .guide-steps {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 13.5px;
+      line-height: 1.65;
+    }
+    .guide-steps li {
+      margin-bottom: 7px;
+    }
+    .guide-tip {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: var(--soft);
+      border-radius: 10px;
+      font-size: 12.5px;
+      color: var(--text);
     }
 
     .stat-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
@@ -271,6 +310,15 @@
       }
       .pdf-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
       .pdf-grid-6 .pdf-card img { height: 105px; }
+      .guide-print-card {
+        border: 1px solid #e2d6ca;
+        border-left: 4px solid var(--primary);
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
       .pdf-header {
         display: flex; justify-content: space-between; align-items: center;
         border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin-bottom: 12px;
@@ -294,7 +342,10 @@
         <div style="font-size:11px;color:var(--muted);">Cake &amp; Bakery Studio</div>
       </div>
     </div>
-    <button class="btn btn-soft btn-sm" onclick="openInstallGuide()">📲 Install HP</button>
+    <div class="row" style="gap:6px;">
+      <button class="btn btn-outline btn-sm" onclick="switchTab('guide')">📘 Panduan</button>
+      <button class="btn btn-soft btn-sm" onclick="openInstallGuide()">📲 Install</button>
+    </div>
   </header>
 
   <div class="app-shell" id="appShell">
@@ -313,6 +364,7 @@
       <button class="nav-btn" data-tab="catalogs" onclick="switchTab('catalogs')">📖 Multi-Katalog</button>
       <button class="nav-btn" data-tab="proposals" onclick="switchTab('proposals')">📄 Proposal Bisnis</button>
       <button class="nav-btn" data-tab="settings" onclick="switchTab('settings')">☁️ Cloud &amp; AI</button>
+      <button class="nav-btn" data-tab="guide" onclick="switchTab('guide')">📘 Panduan Lengkap</button>
 
       <div style="margin-top:auto;padding-top:14px;border-top:1px solid var(--border);">
         <button class="btn btn-soft btn-block btn-sm" onclick="openInstallGuide()">📲 Install di Android / iPhone</button>
@@ -335,8 +387,13 @@
           </div>
         </div>
 
-        <h2 class="page-title">Selamat Datang di Studio Bakery 👋</h2>
-        <p class="page-sub">Kelola foto produk, katalog online terpisah dengan keranjang &amp; ongkir WhatsApp, serta proposal bisnis dalam satu aplikasi.</p>
+        <div class="row between" style="margin-bottom:4px;">
+          <div>
+            <h2 class="page-title" style="margin-bottom:2px;">Selamat Datang di Studio Bakery 👋</h2>
+            <p class="page-sub" style="margin-bottom:14px;">Kelola foto produk, katalog online terpisah dengan keranjang &amp; ongkir WhatsApp, serta proposal bisnis dalam satu aplikasi.</p>
+          </div>
+          <button class="btn btn-soft btn-sm" style="margin-bottom:14px;" onclick="switchTab('guide')">📘 Baca Panduan &amp; Download PDF</button>
+        </div>
 
         <div class="grid-4 stats-grid" style="margin-bottom:16px;">
           <div class="stat-box"><div class="lbl">Total Produk</div><div class="val" id="statProd">0</div></div>
@@ -362,9 +419,9 @@
             <button class="btn btn-primary btn-sm" onclick="switchTab('catalogs'); openCatalogModal();">Buat Katalog</button>
           </div>
           <div class="card">
-            <h3>📄 Susun Proposal</h3>
-            <p style="font-size:13px;color:var(--muted);">Tawarkan snack box kantor, konsinyasi kafe, atau hampers korporat secara profesional.</p>
-            <button class="btn btn-primary btn-sm" onclick="switchTab('proposals'); openProposalModal();">Buat Proposal</button>
+            <h3>📘 Buku Panduan &amp; Tutorial</h3>
+            <p style="font-size:13px;color:var(--muted);">Pelajari cara mendapatkan Gemini API Key gratis, menghubungkan Supabase &amp; unduh versi PDF.</p>
+            <button class="btn btn-primary btn-sm" onclick="switchTab('guide')">Buka Panduan</button>
           </div>
         </div>
       </section>
@@ -503,7 +560,10 @@
             </div>
 
             <div style="padding:14px;background:#f8f9fa;border:1px solid #e6e6e6;border-radius:12px;">
-              <div style="font-weight:700;font-size:13.5px;margin-bottom:4px;">🔑 Atau Pakai Gemini API Key Sendiri (Opsional)</div>
+              <div class="row between" style="margin-bottom:4px;">
+                <div style="font-weight:700;font-size:13.5px;">🔑 Atau Pakai Gemini API Key Sendiri (Gratis)</div>
+                <button type="button" class="btn btn-soft btn-sm" style="padding:3px 8px;font-size:11px;" onclick="openGuideChapter('bab5')">Lihat Cara Dapat</button>
+              </div>
               <p style="font-size:12px;color:var(--muted);margin:0 0 8px;">
                 Jika kuota bonus habis, masukkan API Key gratis dari Google AI Studio. Jika diisi, aplikasi otomatis memakai API Key pribadimu.
               </p>
@@ -521,7 +581,10 @@
           <!-- SUPABASE & BACKUP -->
           <div>
             <div class="card">
-              <h3>☁️ Koneksi Supabase (Opsional)</h3>
+              <div class="row between" style="margin-bottom:6px;">
+                <h3 style="margin:0;">☁️ Koneksi Supabase (Opsional)</h3>
+                <button type="button" class="btn btn-soft btn-sm" style="padding:3px 8px;font-size:11px;" onclick="openGuideChapter('bab6')">Panduan Login</button>
+              </div>
               <p style="font-size:12.5px;color:var(--muted);margin-top:0;">
                 Hubungkan database Supabase pribadimu untuk sinkronisasi cloud &amp; anti-pause otomatis.
               </p>
@@ -558,6 +621,26 @@
         </div>
       </section>
 
+      <!-- TAB: BUKU PANDUAN LENGKAP -->
+      <section id="tab-guide" class="hidden">
+        <div class="install-banner" style="background:linear-gradient(135deg, #2d2018, #5c3a24);">
+          <div>
+            <h4>📘 Buku Panduan Penggunaan Studio Bakery</h4>
+            <p>Panduan lengkap mulai dari install di HP, katalog online, cara dapat Gemini API Key gratis, hingga koneksi Supabase.</p>
+          </div>
+          <div class="row">
+            <button class="btn btn-outline btn-sm" style="color:#2d2018;background:#fff;" onclick="printGuidePDF()">📄 Download / Cetak Panduan PDF</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="text" id="guideSearch" placeholder="🔍 Cari topik panduan (contoh: API Key, Supabase, Ongkir, iPhone, Backup)..." oninput="renderGuide()" />
+        </div>
+
+        <div class="chip-bar" id="guideFilterBar"></div>
+        <div id="guideContainer"></div>
+      </section>
+
     </main>
   </div>
 
@@ -569,6 +652,7 @@
     <button data-tab="catalogs" onclick="switchTab('catalogs')"><span class="ico">📖</span>Katalog</button>
     <button data-tab="proposals" onclick="switchTab('proposals')"><span class="ico">📄</span>Proposal</button>
     <button data-tab="settings" onclick="switchTab('settings')"><span class="ico">☁️</span>Cloud</button>
+    <button data-tab="guide" onclick="switchTab('guide')"><span class="ico">📘</span>Panduan</button>
   </nav>
 
   <!-- MODAL: PRODUK -->
@@ -836,6 +920,111 @@
       mobilMin: 25000
     };
 
+    const GUIDE_CHAPTERS = [
+      {
+        id: 'bab1',
+        short: '1. Install HP',
+        badge: 'BAB 1',
+        title: 'Instalasi Aplikasi di HP (Android & iPhone) & Mode Offline',
+        summary: 'Pasang aplikasi ke layar utama HP agar terbuka layar penuh seperti aplikasi asli dan tetap berjalan tanpa koneksi internet.',
+        steps: [
+          '<strong>Pengguna Android (Google Chrome):</strong> Buka alamat aplikasi di Google Chrome, lalu ketuk tombol <em>Install Sekarang</em> pada banner atas (atau ketuk ikon titik tiga <strong>⋮</strong> di kanan atas → pilih <strong>Install aplikasi / Tambahkan ke Layar Utama</strong>).',
+          '<strong>Pengguna iPhone / iPad (Safari):</strong> Buka alamat aplikasi menggunakan browser <strong>Safari</strong>. Ketuk ikon <strong>Bagikan (Share)</strong> berbentuk kotak berpanah ke atas di bagian bawah layar → gulir ke bawah → pilih <strong>Tambah ke Layar Utama (Add to Home Screen)</strong> → ketuk <strong>Tambah</strong>.',
+          '<strong>Penggunaan Offline:</strong> Setelah terpasang, seluruh data produk, katalog, dan proposal tersimpan otomatis di memori HP sehingga tetap dapat dibuka dan diedit saat sinyal lemah.'
+        ],
+        tip: 'Untuk pengguna iPhone, pastikan menggunakan browser Safari (bukan browser bawaan WhatsApp/Instagram) agar tombol Tambah ke Layar Utama muncul.'
+      },
+      {
+        id: 'bab2',
+        short: '2. Brand & Produk',
+        badge: 'BAB 2',
+        title: 'Mengatur Profil Brand, Kategori & Bank Produk',
+        summary: 'Lengkapi identitas toko satu kali agar otomatis muncul di cover katalog, watermark foto, link online, dan kop proposal.',
+        steps: [
+          '<strong>Profil Brand:</strong> Masuk ke menu <strong>🎨 Profil Brand</strong>. Upload logo toko (otomatis dikompres ringan), isi Nama Toko, Tagline, Warna Tema, Nomor WhatsApp Admin (format <strong>628...</strong> tanpa spasi/tanda plus), Instagram, Alamat, dan Catatan Pre-Order, lalu klik <strong>💾 Simpan Profil Brand</strong>.',
+          '<strong>Kelola Kategori:</strong> Masuk ke menu <strong>🧁 Bank Produk</strong> → klik tombol <strong>🏷️ Kelola Kategori</strong> untuk menambah kategori baru (misal: <em>Dessert Box, Kue Kering, Minuman</em>), mengubah nama, atau menghapus kategori.',
+          '<strong>Tambah Produk & Kompresi WebP:</strong> Klik <strong>+ Tambah Produk</strong>, pilih foto dari galeri HP (aplikasi otomatis memotong 1:1 dan mengompres ke format WebP hemat kuota). Kamu juga bisa menambahkan filter warna makanan dan watermark nama toko.',
+          '<strong>Deskripsi Otomatis:</strong> Isi Nama Produk dan Harga, lalu gunakan tombol <strong>📝 Template Instan</strong> (offline) atau <strong>✨ Bantu Tulis AI</strong> untuk membuat deskripsi kue yang menggugah selera.'
+        ],
+        tip: 'Gunakan nomor WhatsApp dengan awalan 62 (contoh: 6281234567890) agar tombol checkout dari katalog langsung membuka chat WA tanpa error.'
+      },
+      {
+        id: 'bab3',
+        short: '3. Katalog & Ongkir',
+        badge: 'BAB 3',
+        title: 'Membuat Katalog Online Terpisah, Layout Menu & Ongkir Motor/Mobil',
+        summary: 'Bagikan link katalog eksklusif dengan nama tokomu sendiri, bebas dari tampilan dashboard aplikasi.',
+        steps: [
+          'Masuk ke menu <strong>📖 Multi-Katalog</strong> → klik <strong>+ Buat Katalog Baru</strong> (atau ikon pensil <strong>✏️</strong> pada katalog yang sudah ada).',
+          '<strong>Atur Link Singkat Toko:</strong> Pada kolom <em>Alamat Link Singkat Katalog Online</em>, ketik nama tokomu (misal: <code>dapur-mama-rina</code>) sehingga menghasilkan link bersih <code>https://katalog.amndigitalsolution.my.id/dapur-mama-rina</code>.',
+          '<strong>Pilih Tampilan Hemat Scroll:</strong> Pilih <em>2 Menu per Baris (Grid Rapi)</em> atau <em>Baris Kompak (List)</em> jika produkmu banyak agar pelanggan tidak perlu menggulir terlalu jauh, atau <em>1 Menu Besar</em> untuk foto menonjol. Semua produk tetap dikelompokkan rapi per kategori.',
+          '<strong>Aktifkan Keranjang & Ongkir:</strong> Centang fitur keranjang belanja dan atur tarif ongkir <strong>🏍️ Antar Motor</strong> serta <strong>🚗 Antar Mobil</strong> (tarif per kilometer & ongkir minimal).',
+          '<strong>Publikasikan & Cetak PDF:</strong> Klik <strong>💾 Simpan Katalog</strong>, lalu klik tombol hijau <strong>🚀 Publikasikan Link</strong> untuk mendapatkan link online siap sebar. Kamu juga bisa klik <strong>📄 PDF A4</strong> untuk mencetak buku menu PDF.'
+        ],
+        tip: 'Setiap kali kamu menambah produk baru atau mengubah harga, klik kembali tombol Update Link pada katalog agar tampilan online pelanggan ikut terbarui.'
+      },
+      {
+        id: 'bab4',
+        short: '4. Proposal B2B',
+        badge: 'BAB 4',
+        title: 'Menyusun Proposal Bisnis & Penawaran Korporat',
+        summary: 'Siapkan proposal resmi untuk menawarkan paket snack box rapat, konsinyasi kafe, maupun hampers perusahaan.',
+        steps: [
+          'Masuk ke menu <strong>📄 Proposal Bisnis</strong> → klik <strong>+ Buat Proposal Baru</strong>.',
+          'Isi <strong>Judul Proposal</strong> dan <strong>Nama Klien / Instansi</strong> yang dituju.',
+          'Pilih jenis penawaran (<em>Snack Box Kantor, Konsinyasi Kafe, Hampers Korporat, atau Investor</em>), lalu klik <strong>📝 Pakai Template</strong> atau <strong>✨ Susun Bab dengan AI</strong> untuk mengisi draf naskah secara otomatis.',
+          'Centang opsi <strong>Lampirkan Daftar Harga Produk</strong> jika ingin menyertakan tabel harga menu secara otomatis di halaman akhir proposal.',
+          'Klik <strong>💾 Simpan Proposal</strong>, lalu klik <strong>📄 Cetak PDF A4</strong> untuk mengunduh dokumen proposal siap kirim.'
+        ],
+        tip: 'Bab-bab pada proposal dapat ditambah, diubah, atau disesuaikan bahasanya sebelum dicetak ke PDF.'
+      },
+      {
+        id: 'bab5',
+        short: '5. AI & API Key',
+        badge: 'BAB 5',
+        title: 'Mengaktifkan Kuota AI Bonus & Cara Mendapatkan Gemini API Key Sendiri (Gratis)',
+        summary: 'Panduan menggunakan 100 kredit AI bawaan maupun membuat API Key Google Gemini pribadi tanpa biaya langganan.',
+        steps: [
+          '<strong>Cara 1 — Kuota AI Bonus (100x Klik):</strong> Buka menu <strong>☁️ Cloud & AI</strong> → klik tombol <strong>⚡ Aktifkan Kuota AI Bonus (100 Kredit)</strong>. Sistem langsung memberikan kode aktivasi khusus perangkatmu.',
+          '<strong>Cara 2 — Membuat Gemini API Key Sendiri (Gratis Selamanya):</strong> Jika kuota bonus habis, buka situs resmi Google AI Studio di <strong>aistudio.google.com</strong> menggunakan akun Gmail biasa.',
+          'Pada halaman Google AI Studio, klik menu <strong>Get API key</strong> (di panel kiri atau atas) → klik tombol <strong>Create API key</strong> → pilih project (atau klik <em>Create API key in new project</em>).',
+          'Salin kode kunci yang muncul (diawali dengan huruf <strong>AIzaSy...</strong>).',
+          'Kembali ke aplikasi Bakery Studio → menu <strong>☁️ Cloud & AI</strong> → tempelkan kode tersebut ke kolom <em>Gemini API Key Sendiri</em> → klik <strong>💾 Simpan API Key</strong>. Aplikasi otomatis beralih menggunakan kunci pribadimu.'
+        ],
+        tip: 'Jaga kerahasiaan Gemini API Key milikmu dan jangan dibagikan ke grup publik agar kuota harian gratismu tidak dipakai orang lain.',
+        actionType: 'ai'
+      },
+      {
+        id: 'bab6',
+        short: '6. Supabase Cloud',
+        badge: 'BAB 6',
+        title: 'Cara Membuat Akun & Menghubungkan Cloud Supabase (1-Klik & Manual)',
+        summary: 'Hubungkan database Supabase pribadimu agar data tersimpan di cloud dan terjaga aktif otomatis.',
+        steps: [
+          '<strong>Buat Akun & Project Supabase:</strong> Buka <strong>supabase.com</strong> → klik <strong>Start your project</strong> dan login menggunakan akun GitHub atau Google.',
+          'Klik <strong>+ New project</strong> → isi nama project (misal: <code>bakery-db</code>), buat password database, pilih region <strong>Southeast Asia (Singapore)</strong>, lalu klik <strong>Create new project</strong> dan tunggu 1–2 menit hingga status project <em>Healthy</em>.',
+          '<strong>Hubungkan Otomatis (1-Klik):</strong> Buka aplikasi Bakery Studio → masuk ke menu <strong>☁️ Cloud & AI</strong> → klik tombol <strong>⚡ Hubungkan Supabase Otomatis (1-Klik)</strong> → pilih organisasimu → klik <strong>Authorize</strong>. URL Project dan Anon Key akan terisi otomatis sekaligus mengaktifkan fitur <em>Auto-Ping</em> anti-pause.',
+          '<strong>Cara Manual (Alternatif):</strong> Di dashboard project Supabase, buka <strong>Project Settings → API</strong>, salin <em>Project URL</em> dan <em>anon public key</em>, tempelkan ke kolom manual di aplikasi, lalu klik <strong>Simpan & Auto-Ping</strong>.',
+          '<strong>Siapkan Tabel Database (Opsional untuk Sinkronisasi):</strong> Klik tombol <strong>📋 Salin Script SQL</strong> di aplikasi, buka menu <strong>SQL Editor</strong> di dashboard Supabase → <em>New query</em> → tempel script tersebut dan klik <strong>Run</strong>.'
+        ],
+        tip: 'Fitur Auto-Ping menjaga project Supabase gratismu tetap aktif secara berkala sehingga database tidak otomatis terhenti (paused).',
+        actionType: 'sql'
+      },
+      {
+        id: 'bab7',
+        short: '7. Backup Data',
+        badge: 'BAB 7',
+        title: 'Backup & Pemindahan Data Antar Perangkat (Export / Import JSON)',
+        summary: 'Amankan seluruh katalog, foto produk, dan proposal saat berganti HP atau membersihkan browser.',
+        steps: [
+          '<strong>Export Backup:</strong> Buka menu <strong>☁️ Cloud & AI</strong> → pada kotak <em>Backup & Pindah Perangkat</em>, klik tombol <strong>⬇️ Export Backup JSON</strong>. File cadangan berformat <code>.json</code> akan otomatis terunduh ke perangkatmu.',
+          'Simpan file backup tersebut di Google Drive pribadi, WhatsApp (kirim ke nomor sendiri), atau folder komputer.',
+          '<strong>Restore / Pindah HP:</strong> Buka aplikasi di HP baru → masuk ke menu <strong>☁️ Cloud & AI</strong> → klik <strong>⬆️ Import JSON</strong> → pilih file <code>.json</code> sebelumnya. Seluruh profil brand, produk, katalog, dan proposal akan langsung pulih seketika.'
+        ],
+        tip: 'Lakukan Export Backup JSON secara berkala (misalnya seminggu sekali) setelah menambahkan banyak foto produk baru.'
+      }
+    ];
+
     const DEFAULT_STATE = {
       brand: {
         name: 'Dapur Manis Artisan',
@@ -907,6 +1096,7 @@
 
     let state = loadState();
     let activeCatFilter = 'Semua';
+    let activeGuideFilter = 'Semua';
     let previewCatFilter = 'Semua';
     let previewShipMethod = 'pickup';
     let previewShipKm = 0;
@@ -1010,6 +1200,14 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function openGuideChapter(babId) {
+      activeGuideFilter = babId;
+      const searchEl = document.getElementById('guideSearch');
+      if (searchEl) searchEl.value = '';
+      switchTab('guide');
+      renderGuide();
+    }
+
     function openModal(id) { document.getElementById(id).classList.add('open'); }
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
     function openInstallGuide() { openModal('modalInstall'); }
@@ -1050,6 +1248,7 @@
       renderCatalogs();
       renderProposals();
       renderSettingsForm();
+      renderGuide();
     }
 
     function renderHome() {
@@ -1078,6 +1277,126 @@
           <button class="btn btn-outline btn-sm" onclick="switchTab('${s.tab}')">Buka</button>
         </div>
       `).join('');
+    }
+
+    // =========================================================================
+    // BUKU PANDUAN IN-APP & EXPORT PDF A4
+    // =========================================================================
+    function renderGuide() {
+      const bar = document.getElementById('guideFilterBar');
+      const container = document.getElementById('guideContainer');
+      if (!bar || !container) return;
+
+      bar.innerHTML = [
+        `<button class="chip ${activeGuideFilter === 'Semua' ? 'active' : ''}" onclick="activeGuideFilter='Semua';renderGuide();">Semua Bab</button>`,
+        ...GUIDE_CHAPTERS.map(ch =>
+          `<button class="chip ${activeGuideFilter === ch.id ? 'active' : ''}" onclick="activeGuideFilter='${ch.id}';renderGuide();">${esc(ch.short)}</button>`
+        )
+      ].join('');
+
+      const q = (document.getElementById('guideSearch')?.value || '').toLowerCase().trim();
+      const filtered = GUIDE_CHAPTERS.filter(ch => {
+        const matchTab = activeGuideFilter === 'Semua' || ch.id === activeGuideFilter;
+        if (!matchTab) return false;
+        if (!q) return true;
+        const blob = (ch.title + ' ' + ch.summary + ' ' + ch.steps.join(' ') + ' ' + ch.tip).toLowerCase();
+        return blob.includes(q);
+      });
+
+      if (!filtered.length) {
+        container.innerHTML = `<div class="card" style="text-align:center;color:var(--muted);">Topik panduan tidak ditemukan. Coba kata kunci lain atau klik <strong>Semua Bab</strong>.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(ch => {
+        let extraActions = '';
+        if (ch.actionType === 'ai') {
+          extraActions = `
+            <div class="row" style="margin-top:10px;">
+              <a class="btn btn-primary btn-sm" href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">🔗 Buka Google AI Studio</a>
+              <button class="btn btn-outline btn-sm" onclick="switchTab('settings')">⚙️ Masukkan API Key di Cloud &amp; AI</button>
+            </div>
+          `;
+        } else if (ch.actionType === 'sql') {
+          extraActions = `
+            <div class="row" style="margin-top:10px;">
+              <a class="btn btn-primary btn-sm" href="https://supabase.com/dashboard" target="_blank" rel="noopener">🔗 Buka Dashboard Supabase</a>
+              <button class="btn btn-outline btn-sm" onclick="copySqlSetup()">📋 Salin Script SQL Tabel</button>
+              <button class="btn btn-soft btn-sm" onclick="switchTab('settings')">⚡ Hubungkan 1-Klik</button>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="guide-chapter">
+            <span class="badge">${esc(ch.badge)}</span>
+            <h3>${esc(ch.title)}</h3>
+            <p class="guide-summary">${esc(ch.summary)}</p>
+            <ol class="guide-steps">
+              ${ch.steps.map(st => `<li>${st}</li>`).join('')}
+            </ol>
+            ${extraActions}
+            <div class="guide-tip">💡 <strong>Tips Praktis:</strong> ${esc(ch.tip)}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function printGuidePDF() {
+      const chunks = [];
+      for (let i = 0; i < GUIDE_CHAPTERS.length; i += 2) {
+        chunks.push(GUIDE_CHAPTERS.slice(i, i + 2));
+      }
+      const totalPages = chunks.length + 1;
+
+      let html = `
+        <div class="pdf-page pdf-cover">
+          <img src="${state.brand.logo}" style="width:96px;height:96px;border-radius:18px;object-fit:cover;margin-bottom:16px;" />
+          <div style="font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#766458;">Cake &amp; Bakery Preneur Studio</div>
+          <h1 style="font-size:30px;color:var(--primary);margin:10px 0;">Buku Panduan Penggunaan Aplikasi</h1>
+          <p style="font-size:15px;color:#555;max-width:460px;line-height:1.6;">
+            Panduan lengkap instalasi Android &amp; iPhone, pengelolaan katalog online terpisah, tarif ongkir Motor &amp; Mobil, cara mendapatkan Gemini API Key gratis, hingga koneksi Cloud Supabase.
+          </p>
+          <div style="margin-top:36px;padding:14px 24px;background:#fff;border:1px solid #e2d6ca;border-radius:12px;font-size:13px;color:#555;">
+            <strong>Studio Utama:</strong> bakestudio.amndigitalsolution.my.id<br/>
+            <strong>Katalog Online:</strong> katalog.amndigitalsolution.my.id/nama-toko
+          </div>
+        </div>
+      `;
+
+      chunks.forEach((pair, pageIdx) => {
+        html += `
+          <div class="pdf-page">
+            <div>
+              <div class="pdf-header">
+                <strong>Panduan Penggunaan — Cake &amp; Bakery Preneur Studio</strong>
+                <span>Halaman ${pageIdx + 2} dari ${totalPages}</span>
+              </div>
+              ${pair.map(ch => `
+                <div class="guide-print-card">
+                  <div style="font-size:11px;font-weight:700;color:var(--primary);text-transform:uppercase;">${esc(ch.badge)}</div>
+                  <h3 style="margin:3px 0 4px;font-size:16px;color:#2d2018;">${esc(ch.title)}</h3>
+                  <div style="font-size:12px;color:#666;margin-bottom:8px;">${esc(ch.summary)}</div>
+                  <ol style="margin:0;padding-left:18px;font-size:12px;line-height:1.55;color:#222;">
+                    ${ch.steps.map(st => `<li style="margin-bottom:5px;">${st}</li>`).join('')}
+                  </ol>
+                  <div style="margin-top:8px;padding:7px 10px;background:#faf6f0;border-radius:8px;font-size:11.5px;color:#444;">
+                    <strong>Tips:</strong> ${esc(ch.tip)}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            <div class="pdf-footer">
+              <span>Cake &amp; Bakery Preneur — Studio Katalog &amp; Proposal</span>
+              <span>bakestudio.amndigitalsolution.my.id</span>
+            </div>
+          </div>
+        `;
+      });
+
+      document.getElementById('print-area').innerHTML = html;
+      toast('Menyiapkan PDF Panduan — pilih "Simpan sebagai PDF"...');
+      setTimeout(() => window.print(), 250);
     }
 
     // =========================================================================
@@ -1652,7 +1971,6 @@
         html += `</div>`;
       });
 
-      // Keranjang + Rincian + Ongkir
       if (cat.enableCart) {
         const cartEntries = Object.entries(activeCart).filter(([, q]) => q > 0);
         const totalQty = cartEntries.reduce((s, [, q]) => s + q, 0);
@@ -2121,7 +2439,6 @@ INSERT INTO storage.buckets (id, name, public) VALUES ('bakery-assets', 'bakery-
     async function callAI(promptText) {
       const { licenseKey, geminiKey } = state.settings;
 
-      // Prioritas 1: API Key Gemini Pribadi (BYOK)
       if (geminiKey) {
         const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`, {
           method: 'POST',
@@ -2133,7 +2450,6 @@ INSERT INTO storage.buckets (id, name, public) VALUES ('bakery-assets', 'bakery-
         return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
       }
 
-      // Prioritas 2: Kuota AI Bonus Perangkat (Cloudflare Worker)
       if (licenseKey) {
         const res = await fetch(`${DEFAULT_WORKER_URL}/ai/generate`, {
           method: 'POST',

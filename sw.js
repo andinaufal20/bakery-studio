@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bakery-studio-pwa-v2';
+const CACHE_NAME = 'bakery-studio-pwa-v3';
 const STATIC_ASSETS = [
   './',
   './index.html',
